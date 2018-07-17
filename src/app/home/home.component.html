@@ -1,0 +1,15 @@
+<h3>Welcome!</h3>
+<div class="form-group">
+  <label>Username</label>
+  <input type="text" name="username" class="form-control" #uname>
+</div>
+<div class="form-group">
+  <label>Password</label>
+  <input type="password" name="password" class="form-control" #pwd>
+</div>
+
+<div>
+  <button (click)="checkCred(uname.value, pwd.value)" class="btn btn-sm btn-secondary" routerLink="/professor">Accedi</button>
+  <label>Non sei iscritto?</label>
+  <button class="btn btn-sm btn-light" >Registrati</button>
+</div>
