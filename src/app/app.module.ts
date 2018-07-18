@@ -7,17 +7,23 @@ import { AppRoutingModule } from './/app-routing.module';
 import { ProfessorComponent } from './professor/professor.component';
 import {UserService} from './services/user.service';
 import {HttpClientModule} from '@angular/common/http';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ProfessorComponent
+    ProfessorComponent,
+    NotFoundComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

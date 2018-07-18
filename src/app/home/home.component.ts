@@ -21,8 +21,24 @@ export class HomeComponent implements OnInit {
 
     this.userService.checkUserCredentials(mail, pwd).subscribe((user: User) => {
       console.log(user);
-      localStorage.setItem('professor', JSON.stringify(user));
-      this.router.navigateByUrl('professor');
+      if (user) {
+        switch (user.usertype.typeName) {
+          case 'professor': {
+            localStorage.setItem('professor', JSON.stringify(user));
+            this.router.navigateByUrl('professor');
+            break;
+          }
+          case 'secretary': {
+            console.log('Sei un segretario');
+            break;
+          }
+          default: {
+            console.log('Utente assente');
+          }
+        }
+      }
+    },  err =>  {
+      console.log('error');
     });
 
   }
