@@ -2,7 +2,6 @@
   {{ newProf.name }} {{ newProf.surname }} {{ newProf.email }} {{ newProf.password }}
 </h3>
 <ul>
-  <li>Id: {{ newProf.idUser }} </li>
-  <li>StudyCourse: {{ newProf.studycourse }} </li>
-  <li>UserType: {{ newProf.usertype }} </li>
+  <li>Type: {{ newProf.usertype.typeName }} </li>
+  <li>StudyCourse: {{ newProf.studycourse.name }} {{ newProf.studycourse.description }}</li>
 </ul>

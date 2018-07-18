@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
-import { LocalStorage } from '@ngx-pwa/local-storage';
+import {User} from '../models/User';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -10,15 +12,17 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 export class HomeComponent implements OnInit {
 
   constructor(private userService: UserService,
-              private localStorage: LocalStorage) { }
+              private router: Router) { }
 
   ngOnInit() {
   }
 
   checkCred(mail, pwd) {
-    this.userService.checkUserCredentials(mail, pwd).subscribe(user => {
+
+    this.userService.checkUserCredentials(mail, pwd).subscribe((user: User) => {
       console.log(user);
-      this.localStorage.setItem('professor', user).subscribe(() => {});
+      localStorage.setItem('professor', JSON.stringify(user));
+      this.router.navigateByUrl('professor');
     });
 
   }

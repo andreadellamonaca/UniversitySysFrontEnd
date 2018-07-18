@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../models/User';
-import {UserService} from '../services/user.service';
-import {LocalStorage} from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-professor',
@@ -10,26 +8,13 @@ import {LocalStorage} from '@ngx-pwa/local-storage';
 })
 export class ProfessorComponent implements OnInit {
 
-  newProf: User = {
-    idUser: null,
-    studycourse: '',
-    usertype: null,
-    name: '',
-    surname: '',
-    email: '',
-    password: ''
-  };
+  newProf: User = null;
 
-  constructor(private userService: UserService,
-              private localStorage: LocalStorage) { }
 
-  ngOnInit() {
-
-    this.localStorage.getItem<User>('professor').subscribe((user) => {
-
-      this.newProf = user;
-    });
+  constructor() {
+    this.newProf = JSON.parse(localStorage.getItem('professor'));
   }
 
-
+  ngOnInit() {
+  }
 }

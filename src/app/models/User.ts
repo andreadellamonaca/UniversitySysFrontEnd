@@ -1,10 +1,14 @@
+import {UserType} from './user-type';
+import {StudyCourse} from './study-course';
+
 export interface User {
 
-  idUser?: number;
-  studycourse?: string;
-  usertype: number;
-  name: string;
-  surname: string;
   email: string;
+  idUser?: number;
+  name: string;
   password: string;
+  studycourse?: StudyCourse;
+  surname: string;
+  usertype: UserType;
+
 }
