@@ -13,6 +13,7 @@ import { TeachingsComponent } from './professor/teachings/teachings.component';
 import { ReportsComponent } from './professor/reports/reports.component';
 import { ProfnavbarComponent } from './professor/profnavbar/profnavbar.component';
 import { TeachingDetailComponent } from './professor/teaching-detail/teaching-detail.component';
+import {TeachingService} from './services/teaching.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { TeachingDetailComponent } from './professor/teaching-detail/teaching-de
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService],
+  providers: [UserService, TeachingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

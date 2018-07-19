@@ -18,4 +18,8 @@ export class TeachingService {
   getTeachingDetail(name: string): Observable<Teaching> {
     return this.http.get<Teaching>(this.teachingurl + '/getTeachingByName/' + name);
   }
+
+  getTeachingsByIdProfessor(idProf: number): Observable<Teaching[]> {
+    return this.http.get<Teaching[]>(this.teachingurl + '/getTeachingByIdProfessor/' + idProf);
+  }
 }
