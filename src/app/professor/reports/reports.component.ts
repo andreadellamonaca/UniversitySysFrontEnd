@@ -16,6 +16,9 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.reportService.getReportsByIdProfessor(this.currentUser.idUser).subscribe(reports => {
+      this.reports = reports;
+    });
   }
 
 }

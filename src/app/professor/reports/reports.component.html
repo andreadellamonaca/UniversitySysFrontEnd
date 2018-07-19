@@ -4,7 +4,7 @@
   <div class="card" *ngFor="let r of reports">
     <div class="card-body">
       <h3><a routerLink="/professor/reports/{{r.idReport}}">{{ r.idReport }}</a></h3>
-      <p>Classroom: {{ r.classroom }}, State: {{ r.state }}</p>
+      <p>Classroom: {{ r.classroom.name }}, State: {{ r.state }}</p>
     </div>
   </div>
 </div>
