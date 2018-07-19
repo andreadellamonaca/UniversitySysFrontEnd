@@ -6,6 +6,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {TeachingsComponent} from './professor/teachings/teachings.component';
 import {ReportsComponent} from './professor/reports/reports.component';
 import {TeachingDetailComponent} from './professor/teaching-detail/teaching-detail.component';
+import {ReportDetailComponent} from './professor/report-detail/report-detail.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'professor/teachings', component: TeachingsComponent},
   {path: 'professor/teachings/:name', component: TeachingDetailComponent},
   {path: 'professor/reports', component: ReportsComponent},
+  {path: 'professor/reports/:id', component: ReportDetailComponent},
   {path: '**', component: NotFoundComponent}
 
 ];
