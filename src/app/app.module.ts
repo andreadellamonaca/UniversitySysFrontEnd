@@ -14,6 +14,7 @@ import { ReportsComponent } from './professor/reports/reports.component';
 import { ProfnavbarComponent } from './professor/profnavbar/profnavbar.component';
 import { TeachingDetailComponent } from './professor/teaching-detail/teaching-detail.component';
 import {TeachingService} from './services/teaching.service';
+import { ReportDetailComponent } from './professor/report-detail/report-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {TeachingService} from './services/teaching.service';
     ReportsComponent,
     ProfnavbarComponent,
     TeachingDetailComponent,
+    ReportDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,10 @@
-<p>
-  reports works!
-</p>
+<app-profnavbar></app-profnavbar>
+<div class="container">
+  <h2>Reports</h2>
+  <div class="card" *ngFor="let r of reports">
+    <div class="card-body">
+      <h3><a routerLink="/professor/reports/{{r.idReport}}">{{ r.idReport }}</a></h3>
+      <p>Classroom: {{ r.classroom }}, State: {{ r.state }}</p>
+    </div>
+  </div>
+</div>
