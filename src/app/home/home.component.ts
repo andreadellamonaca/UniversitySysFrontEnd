@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
       if (user) {
         switch (user.usertype.typeName) {
           case 'professor': {
+            console.log('Sei un professore');
             localStorage.setItem('professor', JSON.stringify(user));
             this.router.navigateByUrl('professor');
             break;
@@ -37,8 +38,9 @@ export class HomeComponent implements OnInit {
           }
         }
       }
-    },  err =>  {
-      console.log('error');
+    },  err => {
+      alert('Something bad happened, UserNotFound');
+      throw Error('User Not Found');
     });
 
   }

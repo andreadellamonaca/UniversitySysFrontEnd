@@ -1,6 +1,10 @@
-<h3>Welcome!</h3>
+<nav class="navbar navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a href="#" class="navbar-brand">Project Software Engineering University</a>
+  </div>
+</nav>
+<h3>Log in</h3>
 <div class="card card-body mb-3">
-  <form>
     <div class="form-group">
       <label>Username</label>
       <input type="text" name="username" class="form-control" #uname>
@@ -9,11 +13,12 @@
       <label>Password</label>
       <input type="password" name="password" class="form-control" #pwd>
     </div>
-  </form>
+    <div>
+      <button (click)="checkCred(uname.value, pwd.value)" class="btn btn-sm btn-secondary">Accedi</button>
+    </div>
 </div>
 
 <div>
-  <button (click)="checkCred(uname.value, pwd.value)" class="btn btn-sm btn-secondary">Accedi</button>
   <label>Non sei iscritto?</label>
-  <button class="btn btn-sm btn-light" >Registrati</button>
+  <button class="btn btn-sm btn-primary">Registrati</button>
 </div>

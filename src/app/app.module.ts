@@ -8,8 +8,8 @@ import { ProfessorComponent } from './professor/professor.component';
 import {UserService} from './services/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfnavbarComponent } from './profnavbar/profnavbar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     ProfessorComponent,
     NotFoundComponent,
-    NavbarComponent
+    ProfnavbarComponent
   ],
   imports: [
     BrowserModule,
