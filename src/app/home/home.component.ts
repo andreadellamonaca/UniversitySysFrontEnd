@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {User} from '../models/User';
 import {Router} from '@angular/router';
+import {throwError} from 'rxjs';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
         switch (user.usertype.typeName) {
           case 'professor': {
             console.log('Sei un professore');
-            localStorage.setItem('professor', JSON.stringify(user));
+            localStorage.setItem('currentUser', JSON.stringify(user));
             this.router.navigateByUrl('professor');
             break;
           }
@@ -40,7 +41,7 @@ export class HomeComponent implements OnInit {
       }
     },  err => {
       alert('Something bad happened, UserNotFound');
-      throw Error('User Not Found');
+      throwError('User Not Found');
     });
 
   }

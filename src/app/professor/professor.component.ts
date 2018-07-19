@@ -12,7 +12,7 @@ export class ProfessorComponent implements OnInit {
 
 
   constructor() {
-    this.newProf = JSON.parse(localStorage.getItem('professor'));
+    this.newProf = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {

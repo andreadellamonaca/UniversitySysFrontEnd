@@ -1,0 +1,10 @@
+<app-profnavbar></app-profnavbar>
+<div class="container">
+  <h2>Teachings</h2>
+  <div class="card" *ngFor="let t of teachings">
+    <div class="card-body">
+      <h3><a routerLink="/professor/teachings/{{t.name}}">{{ t.name }}</a></h3>
+      <p>{{ t.cfu }}</p>
+  </div>
+</div>
+</div>

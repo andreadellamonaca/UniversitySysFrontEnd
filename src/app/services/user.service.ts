@@ -15,4 +15,8 @@ export class UserService {
     return this.http.get<User>(this.loginurl + '/' + mail + '/' + password);
 }
 
+  logout() {
+    localStorage.removeItem('currentUser');
+  }
+
 }

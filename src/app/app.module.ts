@@ -9,7 +9,10 @@ import {UserService} from './services/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfnavbarComponent } from './profnavbar/profnavbar.component';
+import { TeachingsComponent } from './professor/teachings/teachings.component';
+import { ReportsComponent } from './professor/reports/reports.component';
+import { ProfnavbarComponent } from './professor/profnavbar/profnavbar.component';
+import { TeachingDetailComponent } from './professor/teaching-detail/teaching-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ProfnavbarComponent } from './profnavbar/profnavbar.component';
     HomeComponent,
     ProfessorComponent,
     NotFoundComponent,
-    ProfnavbarComponent
+    TeachingsComponent,
+    ReportsComponent,
+    ProfnavbarComponent,
+    TeachingDetailComponent,
   ],
   imports: [
     BrowserModule,
