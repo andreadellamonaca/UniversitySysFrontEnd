@@ -9,6 +9,8 @@ export interface Lecture {
   teaching: Teaching;
   date: Date;
   hour: string;
+  duration: string;
+  description: string;
   tmaterials?: TeachingMaterial[];
   hide_material?: boolean;
 }
