@@ -11,7 +11,10 @@ import {ReportStatus} from '../../models/report-status';
 })
 export class ReportDetailComponent implements OnInit {
   report: Report;
-  reportStatus: ReportStatus;
+  reportStatus: ReportStatus = {
+    idReport: null,
+    name: ''
+  };
 
   constructor(private route: ActivatedRoute,
               private reportService: ReportService) { }
@@ -24,6 +27,8 @@ export class ReportDetailComponent implements OnInit {
         this.reportStatus = reportstatus;
       });
     });
+
+
   }
 
 }
