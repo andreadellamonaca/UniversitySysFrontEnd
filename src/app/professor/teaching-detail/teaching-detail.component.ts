@@ -14,7 +14,7 @@ import {TeachingMaterialService} from '../../services/teaching-material.service'
 })
 export class TeachingDetailComponent implements OnInit {
   teaching: Teaching;
-  lectures: Lecture[];
+  lectures: Lecture[] = [];
 
   constructor(private route: ActivatedRoute,
               private teachingService: TeachingService,

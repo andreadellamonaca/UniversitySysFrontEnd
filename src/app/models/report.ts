@@ -10,4 +10,5 @@ export interface Report {
   problemDescription: string;
   note?: string;
   idReportStatus: number;
+  hide?: boolean;
 }

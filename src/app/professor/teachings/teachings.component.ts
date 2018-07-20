@@ -9,7 +9,7 @@ import {User} from '../../models/User';
   styleUrls: ['./teachings.component.css']
 })
 export class TeachingsComponent implements OnInit {
-  teachings: Teaching[];
+  teachings: Teaching[] = [];
   currentUser: User;
 
   constructor(private teachingService: TeachingService) { }

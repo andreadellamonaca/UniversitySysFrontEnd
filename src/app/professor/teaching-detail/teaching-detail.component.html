@@ -6,19 +6,22 @@
   </div>
   <div class="card-body">
     <h3>Lectures:</h3>
-    <div class="card" *ngFor="let l of lectures">
-      <div class="card-body">
-        <p>
-          {{ l.date }} hour: {{ l.hour }}
-          <button (click)="toggleHide(l)" class="btn btn-sm btn-secondary">Show teaching material</button>
-        </p>
-        <p>Classroom: {{ l.classroom.name }}</p>
-        <div *ngIf="l.hide_material">
-          <ul  *ngFor="let tm of l.tmaterials">
-            <li>Link: <a href="{{ tm. link }}">{{ tm.link }}</a></li>
-          </ul>
+    <div *ngIf="lectures.length > 0">
+      <div class="card" *ngFor="let l of lectures">
+        <div class="card-body">
+          <p>
+            {{ l.date }} hour: {{ l.hour }}
+            <button (click)="toggleHide(l)" class="btn btn-sm btn-secondary">Show teaching material</button>
+          </p>
+          <p>Classroom: {{ l.classroom.name }}</p>
+          <div *ngIf="l.hide_material">
+            <ul  *ngFor="let tm of l.tmaterials">
+              <li>Link: <a href="{{ tm. link }}">{{ tm.link }}</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+    <div *ngIf="lectures.length == 0"><h4>You do not have lectures!</h4></div>
   </div>
 </div>
