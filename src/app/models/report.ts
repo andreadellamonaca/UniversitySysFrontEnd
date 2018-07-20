@@ -7,5 +7,7 @@ export interface Report {
   classroom: Classroom;
   userBySecretaryIdSecretary: User;
   userByProfessorIdProfessor: User;
-  state: string;
+  problemDescription: string;
+  note?: string;
+  idReportStatus: number;
 }

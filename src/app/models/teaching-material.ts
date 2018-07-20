@@ -6,6 +6,7 @@ export interface TeachingMaterial {
   idTeachingMaterial: number;
   lecture: Lecture;
   prof: User;
+  name: string;
   type: string;
   link: string;
 }
