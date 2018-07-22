@@ -1,5 +1,26 @@
 <app-profnavbar></app-profnavbar>
 <div class="container">
+  <button (click)="shownewReportForm()" class="btn btn-sm btn-secondary">Make a report</button>
+  <div><br>
+    <div *ngIf="showReportForm">
+      <form (submit)="addReport(classroom.value)">
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" name="description" class="form-control" [(ngModel)]="reportDTO.problemDescription">
+        </div>
+        <div class="form-group">
+          <label>Classroom</label>
+          <select name="classroom" class="form-control" #classroom>
+            <option *ngFor="let c of classrooms" value="{{ c.idClassroom }}">{{ c.name }}</option>
+          </select>
+        </div>
+        <button [disabled]="!reportDTO.problemDescription" class="btn btn-block mb-4">Add report</button>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<div class="container">
   <h2>Reports</h2>
   <div *ngIf="reports.length > 0">
     <div class="card" *ngFor="let r of reports">
@@ -8,7 +29,7 @@
         <p><button (click)="toggleHide(r)" class="btn btn-sm btn-secondary">Show report detail</button></p>
         <ul  *ngIf="r.hide">
           <li>Classroom: {{ r.classroom.name }}</li>
-          <li>State: {{ reportStatus.name }}</li>
+          <li>State: {{ r.reportstatus.name }}</li>
           <li>Note By Secretary: {{ r.note }}</li>
         </ul>
       </div>
@@ -17,27 +38,3 @@
   <br>
   <div *ngIf="reports.length == 0"><h4>You do not have reports!</h4></div>
 </div>
-<br>
-<div class="container">
-  <button (click)="shownewReportForm()" class="btn btn-sm btn-secondary">Make a report</button>
-  <div>
-    <br>
-    <div *ngIf="showReportForm">
-      <form>
-        <div class="form-group">
-          <label>Description</label>
-          <input type="text" name="description" class="form-control" #title>
-        </div>
-        <div class="form-group">
-          <label>Classroom</label>
-          <select name="classroom" class="form-control" #classroom>
-            <option value="aula 1">aula 1</option>
-            <option value="aula 2">aula 2</option>
-          </select>
-        </div>
-        <button (click)="addPost(title.value, body.value)" class="btn btn-block mb-4">Add report</button>
-      </form>
-    </div>
-  </div>
-</div>
-

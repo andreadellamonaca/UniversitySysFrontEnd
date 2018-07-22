@@ -14,6 +14,7 @@ import { ReportsComponent } from './professor/reports/reports.component';
 import { ProfnavbarComponent } from './professor/profnavbar/profnavbar.component';
 import { TeachingDetailComponent } from './professor/teaching-detail/teaching-detail.component';
 import {TeachingService} from './services/teaching.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {TeachingService} from './services/teaching.service';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [UserService, TeachingService],
   bootstrap: [AppComponent]

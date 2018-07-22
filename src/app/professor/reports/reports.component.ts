@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Report} from '../../models/report';
 import {User} from '../../models/User';
 import {ReportService} from '../../services/report.service';
-import {ReportStatus} from '../../models/report-status';
+import {Classroom} from '../../models/classroom';
+import {ClassroomService} from '../../services/classroom.service';
+import {ReportDTO} from '../../models/report-dto';
 
 @Component({
   selector: 'app-reports',
@@ -13,33 +15,46 @@ export class ReportsComponent implements OnInit {
   reports: Report[] = [];
   currentUser: User;
   report: Report;
-  reportStatus: ReportStatus = {
-    idReport: null,
-    name: ''
+  classrooms: Classroom[] = [];
+  reportDTO: ReportDTO = {
+    idclassroom: null,
+    userByProfessorIdProfessor: null,
+    problemDescription: ''
   };
+
   showReportForm: boolean = false;
 
-  constructor(private reportService: ReportService) { }
+  constructor(private reportService: ReportService,
+              private classroomService: ClassroomService) { }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.reportService.getReportsByIdProfessor(this.currentUser.idUser).subscribe(reports => {
       this.reports = reports;
     });
+    this.classroomService.getAll().subscribe(classrooms => {
+      this.classrooms = classrooms;
+    });
   }
 
   toggleHide(r: Report) {
+    r.hide = !r.hide;
     this.reportService.getReportDetail(r.idReport).subscribe(report => {
       this.report = report;
-      this.reportService.getReportStatusById(this.report.idReportStatus).subscribe(reportstatus => {
-        this.reportStatus = reportstatus;
-      });
     });
-    r.hide = !r.hide;
   }
 
   shownewReportForm() {
     this.showReportForm = true;
+  }
+
+  addReport(classroom) {
+    this.reportDTO.idclassroom = classroom;
+    this.reportDTO.userByProfessorIdProfessor = this.currentUser.idUser;
+    this.reportService.addnewReport(this.reportDTO).subscribe(rep => {
+      console.log(rep);
+      alert('Report sent!');
+    });
   }
 
 }
