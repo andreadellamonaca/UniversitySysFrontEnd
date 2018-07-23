@@ -1,0 +1,10 @@
+select{
+  width: 100px;
+  text-overflow: ellipsis;
+}
+
+.form-control2{
+  margin-right: 100px;
+  list-style-type:none;
+}
+

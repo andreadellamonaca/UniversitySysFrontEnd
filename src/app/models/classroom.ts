@@ -1,6 +1,6 @@
 export interface Classroom {
   idClassroom: number;
-  name: string;
+  name?: string;
   description?: string;
   latitude?: number;
   longitude?: number;

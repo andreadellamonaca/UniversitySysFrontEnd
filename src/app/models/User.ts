@@ -3,12 +3,12 @@ import {StudyCourse} from './study-course';
 
 export interface User {
 
-  email: string;
+  email?: string;
   idUser?: number;
-  name: string;
-  password: string;
+  name?: string;
+  password?: string;
   studycourse?: StudyCourse;
-  surname: string;
-  usertype: UserType;
+  surname?: string;
+  usertype?: UserType;
 
 }

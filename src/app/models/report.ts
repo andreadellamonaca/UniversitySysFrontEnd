@@ -4,10 +4,10 @@ import {ReportStatus} from './report-status';
 
 export interface Report {
 
-  idReport: number;
+  idReport?: number;
   classroom: Classroom;
-  reportstatus: ReportStatus;
-  userBySecretaryIdSecretary: User;
+  reportstatus?: ReportStatus;
+  userBySecretaryIdSecretary?: User;
   userByProfessorIdProfessor: User;
   problemDescription: string;
   note?: string;

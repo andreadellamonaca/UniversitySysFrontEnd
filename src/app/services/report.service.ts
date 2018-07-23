@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Report} from '../models/report';
-import {ReportDTO} from '../models/report-dto';
 
 const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 
@@ -26,7 +25,11 @@ export class ReportService {
     return this.http.get<Report>(this.reporturl + '/getReportById/' + idReport);
   }
 
-  addnewReport(reportDTO: ReportDTO): Observable<Report> {
-    return this.http.post<Report>(this.reporturl + '/save', reportDTO, {headers});
+  addnewReport(report: Report): Observable<Report> {
+    return this.http.post<Report>(this.reporturl + '/save', report, {headers});
+  }
+
+  getReportsByIdClassroom(idClassroom: number): Observable<Report[]> {
+    return this.http.get<Report[]>(this.reporturl + '/getReportsByIdClassroom/' + idClassroom);
   }
 }
