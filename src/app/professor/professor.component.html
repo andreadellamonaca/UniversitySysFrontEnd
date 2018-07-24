@@ -1,8 +1,12 @@
 <app-profnavbar></app-profnavbar>
-<h3>
-  {{ newProf.name }} {{ newProf.surname }} {{ newProf.email }} {{ newProf.password }}
-</h3>
-<ul>
-  <li>Type: {{ newProf.usertype.typeName }} </li>
-  <li>StudyCourse: {{ newProf.studycourse.name }} {{ newProf.studycourse.description }}</li>
-</ul>
+<div class="container">
+  <h2>
+    Welcome {{ newProf.name }} {{ newProf.surname }}!!!
+  </h2>
+  <br>
+  <h3>Your informations:</h3>
+  <ul>
+    <li>Email: {{ newProf.email }}</li>
+    <li>Role: {{ newProf.usertype.typeName }} </li>
+  </ul>
+</div>

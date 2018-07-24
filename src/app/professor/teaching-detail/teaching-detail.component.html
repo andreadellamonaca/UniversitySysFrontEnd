@@ -16,15 +16,35 @@
           <p>Classroom: {{ l.classroom.name }}</p>
           <div *ngIf="l.hide_material">
             <ul  *ngFor="let tm of l.tmaterials">
-              <li>Link: <a href="{{ tm. link }}">{{ tm.name }}</a>
+              <li>Link: <a href="{{ tm. link }}">{{ tm.name }}    </a>
                 <button (click)="removematerial(l, tm)" class="btn btn-sm btn-secondary">Delete</button>
               </li>
             </ul>
           </div>
-            <input type="file" (change)="getFile($event)" class="form-control" id ="myFileField" #fileinput />
-            <button  mat-raised-button color="primary" class="add-files-btn" (click)="uploadFile(l.idLecture)">
-              Add Files
-            </button>
+          <label>Choose the type of teaching material you want to upload:</label>
+          <select name="upload_type" [(ngModel)]="t_material.type">
+            <option value="none"></option>
+            <option value="Link">Link</option>
+            <option value="File">File</option>
+          </select>
+          <div *ngIf="t_material.type ==='Link'">
+            <form (submit)="uploadLink(l.idLecture)">
+              <div class="form-group">
+                <label>Resource name:</label>
+                <input type="text" name="resource_name" class="form-control" [(ngModel)]="t_material.name">
+              </div>
+              <div class="form-group">
+                <label>Link:</label>
+                <input type="text" name="link" class="form-control" [(ngModel)]="t_material.link">
+              </div>
+              <button [disabled]="!(t_material.name) || !(t_material.link)" class="btn btn-sm btn-secondary">Add Link</button>
+            </form>
+          </div>
+          <div *ngIf="t_material.type ==='File'">
+            <input type="file" (change)="getFile($event)" class="form-control" id ="myFileField"/>
+            <button  mat-raised-button color="primary" class="add-files-btn" (click)="uploadFile(l.idLecture)">Add Files</button>
+          </div>
+
         </div>
       </div>
     </div>

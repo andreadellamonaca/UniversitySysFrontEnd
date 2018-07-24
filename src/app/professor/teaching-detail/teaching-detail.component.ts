@@ -20,6 +20,13 @@ export class TeachingDetailComponent implements OnInit {
 
   currentUser: User;
   file: File;
+  t_material: TeachingMaterial = {
+    name: '',
+    type: '',
+    link: '',
+    user: {idUser: null},
+    lecture: {idLecture: null}
+  };
 
 
 
@@ -55,6 +62,17 @@ export class TeachingDetailComponent implements OnInit {
     formData.append('userid', this.currentUser.idUser.toString());
     this.tmaterialService.saveFile(formData).subscribe(tm => {
       console.log(tm);
+      alert('File uploaded correctly!');
+    });
+  }
+
+  uploadLink(lectureid: number) {
+    this.t_material.user.idUser = this.currentUser.idUser;
+    this.t_material.lecture.idLecture = lectureid;
+    console.log(this.t_material);
+    this.tmaterialService.saveLink(this.t_material).subscribe(tm => {
+      console.log(tm);
+      alert('Link uploaded correctly!');
     });
   }
 
@@ -64,10 +82,12 @@ export class TeachingDetailComponent implements OnInit {
 
   removematerial(l: Lecture, tm: TeachingMaterial) {
     this.tmaterialService.removeMaterial(tm.idTeachingMaterial).subscribe(result => {
-      const index = l.tmaterials.indexOf(tm);
-      l.tmaterials.splice(index, 1);
       if (result) {
+        const index = l.tmaterials.indexOf(tm);
+        l.tmaterials.splice(index, 1);
         alert('The selected Teaching Material deleted!');
+      } else {
+        alert('Something went wrong! Try again!');
       }
     });
   }
