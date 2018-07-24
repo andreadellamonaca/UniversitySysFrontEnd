@@ -19,6 +19,14 @@
               <li>Link: <a href="{{ tm. link }}">{{ tm.link }}</a></li>
             </ul>
           </div>
+            <input type="file" (change)="getFile($event)" class="form-control" id ="myFileField" #fileinput />
+            <button  mat-raised-button color="primary" class="add-files-btn" (click)="uploadFile(l.idLecture)">
+              Add Files
+            </button>
+
+
+
+
         </div>
       </div>
     </div>
