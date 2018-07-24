@@ -60,7 +60,16 @@ export class TeachingDetailComponent implements OnInit {
 
   getFile(event) {
     this.file = event.target.files[0];
+  }
 
+  removematerial(l: Lecture, tm: TeachingMaterial) {
+    this.tmaterialService.removeMaterial(tm.idTeachingMaterial).subscribe(result => {
+      const index = l.tmaterials.indexOf(tm);
+      l.tmaterials.splice(index, 1);
+      if (result) {
+        alert('The selected Teaching Material deleted!');
+      }
+    });
   }
 
 }

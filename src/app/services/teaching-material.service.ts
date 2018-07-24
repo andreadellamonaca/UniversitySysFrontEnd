@@ -20,4 +20,8 @@ export class TeachingMaterialService {
   saveFile(formData: FormData): Observable<TeachingMaterial> {
     return this.http.post<TeachingMaterial>(this.teachingmaterialurl + '/saveFile' , formData);
   }
+
+  removeMaterial(idTeachingmaterial: number): Observable<boolean> {
+    return this.http.get<boolean>(this.teachingmaterialurl + '/delete/' + idTeachingmaterial);
+  }
 }

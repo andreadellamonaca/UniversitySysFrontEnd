@@ -16,17 +16,15 @@
           <p>Classroom: {{ l.classroom.name }}</p>
           <div *ngIf="l.hide_material">
             <ul  *ngFor="let tm of l.tmaterials">
-              <li>Link: <a href="{{ tm. link }}">{{ tm.link }}</a></li>
+              <li>Link: <a href="{{ tm. link }}">{{ tm.name }}</a>
+                <button (click)="removematerial(l, tm)" class="btn btn-sm btn-secondary">Delete</button>
+              </li>
             </ul>
           </div>
             <input type="file" (change)="getFile($event)" class="form-control" id ="myFileField" #fileinput />
             <button  mat-raised-button color="primary" class="add-files-btn" (click)="uploadFile(l.idLecture)">
               Add Files
             </button>
-
-
-
-
         </div>
       </div>
     </div>
