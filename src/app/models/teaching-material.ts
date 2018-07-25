@@ -9,4 +9,5 @@ export interface TeachingMaterial {
   name: string;
   type: string;
   link: string;
+  av_rating?: number;
 }

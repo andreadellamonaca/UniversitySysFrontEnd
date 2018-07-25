@@ -10,14 +10,21 @@
       <div class="card" *ngFor="let l of lectures">
         <div class="card-body">
           <p>
-            {{ l.date }} hour: {{ l.hour }}
-            <button (click)="toggleHide(l)" class="btn btn-sm btn-secondary">Show teaching material</button>
+            Datetime: {{ l.date }} {{ l.hour }} &nbsp;&nbsp;&nbsp;&nbsp;
+            <label><a routerLink="{{ l.idLecture }}/ratinglist" (click)="storeLecture(l)">Average Rating</a>:</label>
+            <ngb-rating [rate]="l.av_rating" [readonly]="true" max="5"></ngb-rating>
+            <br>
+            Classroom: {{ l.classroom.name }}
           </p>
-          <p>Classroom: {{ l.classroom.name }}</p>
+          <p></p>
+          <p><button (click)="toggleHide(l)" class="btn btn-sm btn-secondary">Show teaching material</button></p>
           <div *ngIf="l.hide_material">
             <ul  *ngFor="let tm of l.tmaterials">
               <li>Link: <a href="{{ tm. link }}">{{ tm.name }}    </a>
-                <button (click)="removematerial(l, tm)" class="btn btn-sm btn-secondary">Delete</button>
+                <button (click)="removematerial(l, tm)" class="btn btn-sm btn-secondary">Delete</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                <label><a routerLink="{{ tm.idTeachingMaterial }}/ratinglist" (click)="storeTMaterial(tm)">Average Rating</a>:</label>
+                <ngb-rating [rate]="tm.av_rating" [readonly]="true" max="5"></ngb-rating>
+                <br>
               </li>
             </ul>
           </div>

@@ -15,6 +15,9 @@ import { ProfnavbarComponent } from './professor/profnavbar/profnavbar.component
 import { TeachingDetailComponent } from './professor/teaching-detail/teaching-detail.component';
 import {TeachingService} from './services/teaching.service';
 import { FormsModule } from '@angular/forms';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { RatingComponent } from './professor/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -26,15 +29,17 @@ import { FormsModule } from '@angular/forms';
     ReportsComponent,
     ProfnavbarComponent,
     TeachingDetailComponent,
+    RatingComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot()
   ],
-  providers: [UserService, TeachingService],
+  providers: [UserService, TeachingService, NgbRatingConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

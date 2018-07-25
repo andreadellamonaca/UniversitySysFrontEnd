@@ -6,12 +6,14 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {TeachingsComponent} from './professor/teachings/teachings.component';
 import {ReportsComponent} from './professor/reports/reports.component';
 import {TeachingDetailComponent} from './professor/teaching-detail/teaching-detail.component';
+import {RatingComponent} from './professor/rating/rating.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'professor', component: ProfessorComponent},
   {path: 'professor/teachings', component: TeachingsComponent},
   {path: 'professor/teachings/:name', component: TeachingDetailComponent},
+  {path: 'professor/teachings/:name/:id/ratinglist', component: RatingComponent},
   {path: 'professor/reports', component: ReportsComponent},
   {path: '**', component: NotFoundComponent}
 

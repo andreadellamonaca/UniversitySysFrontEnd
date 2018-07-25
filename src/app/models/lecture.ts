@@ -13,4 +13,5 @@ export interface Lecture {
   description?: string;
   tmaterials?: TeachingMaterial[];
   hide_material?: boolean;
+  av_rating?: number;
 }

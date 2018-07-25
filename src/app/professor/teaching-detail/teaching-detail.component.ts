@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Teaching} from '../../models/teaching';
 import {ActivatedRoute} from '@angular/router';
 import {TeachingService} from '../../services/teaching.service';
@@ -6,13 +6,15 @@ import {Lecture} from '../../models/lecture';
 import {LectureService} from '../../services/lecture.service';
 import {TeachingMaterial} from '../../models/teaching-material';
 import {TeachingMaterialService} from '../../services/teaching-material.service';
-import {Form} from '@angular/forms';
 import {User} from '../../models/User';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {RatingService} from '../../services/rating.service';
 
 @Component({
   selector: 'app-teaching-detail',
   templateUrl: './teaching-detail.component.html',
-  styleUrls: ['./teaching-detail.component.css']
+  styleUrls: ['./teaching-detail.component.css'],
+  providers: [NgbRatingConfig]
 })
 export class TeachingDetailComponent implements OnInit {
   teaching: Teaching;
@@ -33,7 +35,8 @@ export class TeachingDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private teachingService: TeachingService,
               private lectureService: LectureService,
-              private tmaterialService: TeachingMaterialService) { }
+              private tmaterialService: TeachingMaterialService,
+              private ratingService: RatingService) { }
 
   ngOnInit() {
 
@@ -44,6 +47,11 @@ export class TeachingDetailComponent implements OnInit {
       this.teaching = teaching;
       this.lectureService.getByIdTeaching(this.teaching.idTeaching).subscribe(lectures => {
         this.lectures = lectures;
+        for (const i of this.lectures) {
+           this.ratingService.getAverageRatingByIdLecture(i.idLecture).subscribe(rating => {
+             i.av_rating = rating;
+          });
+        }
       });
     });
   }
@@ -52,6 +60,11 @@ export class TeachingDetailComponent implements OnInit {
     l.hide_material = !l.hide_material;
     this.tmaterialService.getTMaterialByLectureId(l.idLecture).subscribe(tmaterials => {
       l.tmaterials = tmaterials;
+      for (const i of l.tmaterials) {
+        this.ratingService.getAverageRatingByIdMaterial(i.idTeachingMaterial).subscribe(rating => {
+          i.av_rating = rating;
+        });
+      }
     });
   }
 
@@ -90,6 +103,14 @@ export class TeachingDetailComponent implements OnInit {
         alert('Something went wrong! Try again!');
       }
     });
+  }
+
+  storeLecture(l: Lecture) {
+    localStorage.setItem('selectedLesson', JSON.stringify(l));
+  }
+
+  storeTMaterial(tm: TeachingMaterial) {
+    localStorage.setItem('selectedMaterial', JSON.stringify(tm));
   }
 
 }
