@@ -1,0 +1,35 @@
+<app-profnavbar></app-profnavbar>
+<button class="btn btn-light btn-sm mb-3" (click)="backEvent()">Back</button>
+<div class="container" *ngIf="!(lecture == null)">
+  <h2>Rating List about Lesson {{ lecture.date }} {{ lecture.hour }}</h2>
+  <table>
+    <tr>
+      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Level</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Note</th>
+    </tr>
+    <tr *ngFor="let r of lectureratings">
+      <td>{{ lectureratings.indexOf(r)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td><ngb-rating [rate]="r.level" [readonly]="true" max="5"></ngb-rating></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ r.note }}</td>
+    </tr>
+  </table>
+  <div *ngIf="lectureratings.length == 0"><h4>There are no ratings about this lecture!</h4></div>
+</div>
+
+<div class="container" *ngIf="!(tmaterial == null)">
+  <h2>Rating List about Teaching material {{ tmaterial.name }}</h2>
+  <table>
+    <tr>
+      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Level</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Note</th>
+    </tr>
+    <tr *ngFor="let t of tmaterialratings">
+      <td>{{ tmaterialratings.indexOf(t)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td><ngb-rating [rate]="t.level" [readonly]="true" max="5"></ngb-rating></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ t.note }}</td>
+    </tr>
+  </table>
+  <div *ngIf="tmaterialratings.length == 0"><h4>There are no ratings about this teaching material!</h4></div>
+</div>
