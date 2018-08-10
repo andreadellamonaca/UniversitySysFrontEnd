@@ -9,6 +9,7 @@ import {TeachingMaterialService} from '../../services/teaching-material.service'
 import {User} from '../../models/User';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {RatingService} from '../../services/rating.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-teaching-detail',
@@ -36,7 +37,8 @@ export class TeachingDetailComponent implements OnInit {
               private teachingService: TeachingService,
               private lectureService: LectureService,
               private tmaterialService: TeachingMaterialService,
-              private ratingService: RatingService) { }
+              private ratingService: RatingService,
+              private notService: NotificationService) { }
 
   ngOnInit() {
 
@@ -75,6 +77,9 @@ export class TeachingDetailComponent implements OnInit {
     formData.append('userid', this.currentUser.idUser.toString());
     this.tmaterialService.saveFile(formData).subscribe(tm => {
       console.log(tm);
+      this.notService.NewMaterialNotification(this.teaching).subscribe(data => {
+        console.log(data);
+      });
       alert('File uploaded correctly!');
     });
   }
@@ -85,8 +90,15 @@ export class TeachingDetailComponent implements OnInit {
     console.log(this.t_material);
     this.tmaterialService.saveLink(this.t_material).subscribe(tm => {
       console.log(tm);
+      this.notService.NewMaterialNotification(this.teaching).subscribe(data => {
+        console.log(data);
+      });
       alert('Link uploaded correctly!');
     });
+  }
+
+  setLect(l: Lecture) {
+    this.t_material.lecture = l;
   }
 
   getFile(event) {

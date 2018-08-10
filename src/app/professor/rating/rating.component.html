@@ -1,5 +1,7 @@
 <app-profnavbar></app-profnavbar>
-<button class="btn btn-light btn-sm mb-3" (click)="backEvent()">Back</button>
+<div class="container">
+  <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
+</div>
 <div class="container" *ngIf="!(lecture == null)">
   <h2>Rating List about Lesson {{ lecture.date }} {{ lecture.hour }}</h2>
   <table>

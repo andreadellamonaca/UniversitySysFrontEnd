@@ -29,12 +29,12 @@
             </ul>
           </div>
           <label>Choose the type of teaching material you want to upload:</label>
-          <select name="upload_type" [(ngModel)]="t_material.type">
+          <select name="upload_type" (click)="setLect(l)" [(ngModel)]="t_material.type">
             <option value="none"></option>
             <option value="Link">Link</option>
             <option value="File">File</option>
           </select>
-          <div *ngIf="t_material.type ==='Link'">
+          <div *ngIf="t_material.type ==='Link' && t_material.lecture.idLecture == l.idLecture">
             <form (submit)="uploadLink(l.idLecture)">
               <div class="form-group">
                 <label>Resource name:</label>
@@ -47,7 +47,7 @@
               <button [disabled]="!(t_material.name) || !(t_material.link)" class="btn btn-sm btn-secondary">Add Link</button>
             </form>
           </div>
-          <div *ngIf="t_material.type ==='File'">
+          <div *ngIf="t_material.type ==='File' && t_material.lecture.idLecture == l.idLecture">
             <input type="file" (change)="getFile($event)" class="form-control" id ="myFileField"/>
             <button  mat-raised-button color="primary" class="add-files-btn" (click)="uploadFile(l.idLecture)">Add Files</button>
           </div>
