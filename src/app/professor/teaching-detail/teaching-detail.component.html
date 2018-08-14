@@ -10,7 +10,7 @@
       <div class="card" *ngFor="let l of lectures">
         <div class="card-body">
           <p>
-            Datetime: {{ l.date }} {{ l.hour }} &nbsp;&nbsp;&nbsp;&nbsp;
+            Datetime: {{ l.date }}, Hour: {{ l.starttime }} - {{ l.endtime }} &nbsp;&nbsp;&nbsp;&nbsp;
             <label><a routerLink="{{ l.idLecture }}/ratinglist" (click)="storeLecture(l)">Average Rating</a>:</label>
             <ngb-rating [rate]="l.av_rating" [readonly]="true" max="5"></ngb-rating>
             <br>

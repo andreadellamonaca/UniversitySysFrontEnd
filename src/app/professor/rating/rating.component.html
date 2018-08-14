@@ -3,7 +3,7 @@
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
 </div>
 <div class="container" *ngIf="!(lecture == null)">
-  <h2>Rating List about Lesson {{ lecture.date }} {{ lecture.hour }}</h2>
+  <h2>Rating List about Lesson {{ lecture.date }}, {{ lecture.starttime }} - {{ lecture.endtime }}</h2>
   <table>
     <tr>
       <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
