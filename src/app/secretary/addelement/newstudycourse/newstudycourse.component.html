@@ -1,0 +1,37 @@
+<app-secrnavbar></app-secrnavbar>
+<div class="container">
+  <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
+</div>
+<div class="container">
+  <h2>Study Courses List</h2>
+  <table>
+    <tr>
+      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Name</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Description</th>
+    </tr>
+    <tr *ngFor="let sc of sclist">
+      <td>{{ sclist.indexOf(sc)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ sc.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ sc.description }}</td>
+      <td><button class="btn btn-sm btn-secondary" (click)="editelem(sc)">Edit</button></td>
+    </tr>
+  </table>
+  <div *ngIf="sclist.length == 0"><h4>There are no study courses!</h4></div>
+</div>
+<hr>
+<div class="container">
+  <h2>Study Course Form:</h2>
+  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
+  <form (submit)="addsc()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" name="name" class="form-control" [(ngModel)]="scmodel.name">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" name="description" class="form-control" [(ngModel)]="scmodel.description">
+    </div>
+    <button [disabled]="!(scmodel.name) || !(scmodel.description)" class="btn btn-block mb-4">Add StudyCourse</button>
+  </form>
+</div>

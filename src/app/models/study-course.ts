@@ -1,6 +1,7 @@
 export interface StudyCourse {
 
-  idStudyCourse: number;
-  name: string;
-  description: string;
+  idStudyCourse?: number;
+  name?: string;
+  description?: string;
+  editform?: boolean;
 }

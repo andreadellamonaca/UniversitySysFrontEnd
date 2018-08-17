@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
           }
           case 'secretary': {
             console.log('Sei un segretario');
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.router.navigateByUrl('secretary');
             break;
           }
           default: {

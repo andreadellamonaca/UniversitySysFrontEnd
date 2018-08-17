@@ -1,5 +1,5 @@
 export interface Classroom {
-  idClassroom: number;
+  idClassroom?: number;
   name?: string;
   description?: string;
   latitude?: number;

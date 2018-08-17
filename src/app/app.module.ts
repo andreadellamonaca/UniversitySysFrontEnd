@@ -18,6 +18,10 @@ import { FormsModule } from '@angular/forms';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RatingComponent } from './professor/rating/rating.component';
+import { SecretaryComponent } from './secretary/secretary.component';
+import { SecrnavbarComponent } from './secretary/secrnavbar/secrnavbar.component';
+import { AddelementComponent } from './secretary/addelement/addelement.component';
+import { NewstudycourseComponent } from './secretary/addelement/newstudycourse/newstudycourse.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import { RatingComponent } from './professor/rating/rating.component';
     ProfnavbarComponent,
     TeachingDetailComponent,
     RatingComponent,
+    SecretaryComponent,
+    SecrnavbarComponent,
+    AddelementComponent,
+    NewstudycourseComponent,
   ],
   imports: [
     BrowserModule,

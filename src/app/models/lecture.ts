@@ -4,7 +4,7 @@ import {TeachingMaterial} from './teaching-material';
 
 export interface Lecture {
 
-  idLecture: number;
+  idLecture?: number;
   classroom?: Classroom;
   teaching?: Teaching;
   date?: Date;

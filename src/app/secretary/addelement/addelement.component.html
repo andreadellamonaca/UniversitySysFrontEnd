@@ -1,0 +1,7 @@
+<app-secrnavbar></app-secrnavbar>
+<div class="container">
+  <h2>Select the element to create:</h2>
+  <div *ngFor="let el of list">
+    <button class="btn btn-sm btn-secondary" (click)="openForm(el.url)">{{ el.title }}</button>
+  </div>
+</div>
