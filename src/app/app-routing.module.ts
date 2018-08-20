@@ -10,6 +10,8 @@ import {RatingComponent} from './professor/rating/rating.component';
 import {SecretaryComponent} from './secretary/secretary.component';
 import {AddelementComponent} from './secretary/addelement/addelement.component';
 import {NewstudycourseComponent} from './secretary/addelement/newstudycourse/newstudycourse.component';
+import {UserComponent} from './secretary/addelement/user/user.component';
+import {TeachingComponent} from './secretary/addelement/teaching/teaching.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path: 'secretary', component: SecretaryComponent},
   {path: 'secretary/newelem', component: AddelementComponent},
   {path: 'secretary/newelem/studycourse', component: NewstudycourseComponent},
+  {path: 'secretary/newelem/user', component: UserComponent},
+  {path: 'secretary/newelem/teaching', component: TeachingComponent},
   {path: '**', component: NotFoundComponent}
 
 ];

@@ -4,4 +4,5 @@ export interface StudyCourse {
   name?: string;
   description?: string;
   editform?: boolean;
+  checked?: boolean;
 }

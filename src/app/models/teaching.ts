@@ -1,4 +1,5 @@
 import {User} from './User';
+import {StudyCourse} from './study-course';
 
 export interface Teaching {
 
@@ -6,4 +7,5 @@ export interface Teaching {
   user?: User;
   name?: string;
   cfu?: number;
+  studycourses?: StudyCourse[];
 }

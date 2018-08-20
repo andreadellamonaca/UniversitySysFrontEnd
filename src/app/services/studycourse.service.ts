@@ -21,4 +21,8 @@ export class StudycourseService {
   save(sc: StudyCourse): Observable<StudyCourse> {
     return this.http.post(this.scurl + '/save', sc, {headers});
   }
+
+  getStudyCoursesByIdTeaching(id: number): Observable<StudyCourse[]> {
+    return this.http.get<StudyCourse[]>(this.scurl + '/getStudycoursesByIdTeaching/' + id);
+  }
 }

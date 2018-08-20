@@ -22,6 +22,8 @@ import { SecretaryComponent } from './secretary/secretary.component';
 import { SecrnavbarComponent } from './secretary/secrnavbar/secrnavbar.component';
 import { AddelementComponent } from './secretary/addelement/addelement.component';
 import { NewstudycourseComponent } from './secretary/addelement/newstudycourse/newstudycourse.component';
+import { UserComponent } from './secretary/addelement/user/user.component';
+import { TeachingComponent } from './secretary/addelement/teaching/teaching.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { NewstudycourseComponent } from './secretary/addelement/newstudycourse/n
     SecrnavbarComponent,
     AddelementComponent,
     NewstudycourseComponent,
+    UserComponent,
+    TeachingComponent,
   ],
   imports: [
     BrowserModule,

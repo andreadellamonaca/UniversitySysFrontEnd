@@ -13,7 +13,7 @@
     <tr *ngFor="let sc of sclist">
       <td>{{ sclist.indexOf(sc)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ sc.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ sc.description }}</td>
+      <td>{{ sc.description }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td><button class="btn btn-sm btn-secondary" (click)="editelem(sc)">Edit</button></td>
     </tr>
   </table>
