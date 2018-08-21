@@ -24,6 +24,8 @@ import { AddelementComponent } from './secretary/addelement/addelement.component
 import { NewstudycourseComponent } from './secretary/addelement/newstudycourse/newstudycourse.component';
 import { UserComponent } from './secretary/addelement/user/user.component';
 import { TeachingComponent } from './secretary/addelement/teaching/teaching.component';
+import { ClassroomComponent } from './secretary/addelement/classroom/classroom.component';
+import { ExamComponent } from './secretary/addelement/exam/exam.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { TeachingComponent } from './secretary/addelement/teaching/teaching.comp
     NewstudycourseComponent,
     UserComponent,
     TeachingComponent,
+    ClassroomComponent,
+    ExamComponent,
   ],
   imports: [
     BrowserModule,

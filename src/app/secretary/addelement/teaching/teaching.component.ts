@@ -25,7 +25,6 @@ export class TeachingComponent implements OnInit {
       for (const i of this.tlist) {
         this.scService.getStudyCoursesByIdTeaching(i.idTeaching).subscribe(sclist => {
           i.studycourses = sclist;
-          console.log(i.studycourses);
         });
       }
     });
@@ -34,6 +33,9 @@ export class TeachingComponent implements OnInit {
     });
     this.scService.getAll().subscribe(list => {
       this.sclist = list;
+      for (const i of this.sclist) {
+        i.checked = false;
+      }
     });
   }
 
@@ -49,6 +51,14 @@ export class TeachingComponent implements OnInit {
     this.profmodel = {};
   }
 
+  changestatus(sc: StudyCourse) {
+    for (const i of this.sclist) {
+      if (sc.idStudyCourse === i.idStudyCourse) {
+        i.checked = !i.checked;
+      }
+    }
+  }
+
   editelem(t: Teaching) {
     this.teachingmodel = t;
     this.profmodel = this.teachingmodel.user;
@@ -61,26 +71,40 @@ export class TeachingComponent implements OnInit {
         }
       }
     }
-    console.log(this.sclist);
   }
 
   addteaching() {
-    this.teachingmodel.user = this.profmodel;
-    this.teachingService.save(this.teachingmodel).subscribe(data => {
-      console.log(data);
-      this.teachingService.getAll().subscribe(list => {
-        this.tlist = list;
-        for (const i of this.tlist) {
-          this.scService.getStudyCoursesByIdTeaching(i.idTeaching).subscribe(sclist => {
-            i.studycourses = sclist;
-          });
+    let count = 0;
+    for (const i of this.sclist) {
+      if (i.checked === true) {
+        count = count + 1;
+      }
+    }
+    if (count === 0) {
+      alert('Error! Choose at least one study course!');
+    } else {
+      this.teachingmodel.user = this.profmodel;
+      this.teachingmodel.studycourses = [];
+      for (const i of this.sclist) {
+        if (i.checked === true) {
+          this.teachingmodel.studycourses.push(i);
         }
+      }
+      this.teachingService.save(this.teachingmodel).subscribe(data => {
+        console.log(data);
+        this.teachingService.getAll().subscribe(list => {
+          this.tlist = list;
+          for (const i of this.tlist) {
+            this.scService.getStudyCoursesByIdTeaching(i.idTeaching).subscribe(sclist => {
+              i.studycourses = sclist;
+            });
+          }
+        });
+        this.userService.getAllProfessors().subscribe(proflist => {
+          this.plist = proflist;
+        });
+        this.cleanform();
       });
-      this.userService.getAllProfessors().subscribe(proflist => {
-        this.plist = proflist;
-      });
-      this.cleanform();
-    });
+    }
   }
-
 }

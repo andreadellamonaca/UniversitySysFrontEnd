@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Classroom} from '../models/classroom';
+
+const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +15,9 @@ export class ClassroomService {
 
   getAll(): Observable<Classroom[]> {
     return this.http.get<Classroom[]>(this.classroomurl + '/getAll');
+  }
+
+  save(c: Classroom): Observable<Classroom> {
+    return this.http.post(this.classroomurl + '/save', c, {headers});
   }
 }

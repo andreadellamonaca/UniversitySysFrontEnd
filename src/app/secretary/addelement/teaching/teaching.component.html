@@ -51,7 +51,7 @@
       <label>Associated Study Courses:</label>
       <div *ngFor="let sc of sclist">
         <label>
-          <input type="checkbox" name="studycourse" value="{{ sc.idStudyCourse }}" [(ngModel)]="sc.checked">
+          <input type="checkbox" name="studycourse" value="{{ sc.idStudyCourse }}" [checked]="sc.checked" (change)="changestatus(sc)">
           {{ sc.name }}
         </label>
       </div>
