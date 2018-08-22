@@ -1,0 +1,47 @@
+<app-secrnavbar></app-secrnavbar>
+<div class="container">
+  <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
+</div>
+<div class="container">
+  <h2>Classrooms List</h2>
+  <table>
+    <tr>
+      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Name</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Description</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Coordinates</th>
+    </tr>
+    <tr *ngFor="let c of clslist">
+      <td>{{ clslist.indexOf(c)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ c.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ c.description }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>Lat: {{ c.latitude }}, Lon: {{ c.longitude }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td><button class="btn btn-sm btn-secondary" (click)="editelem(c)">Edit</button></td>
+    </tr>
+  </table>
+  <div *ngIf="clslist.length == 0"><h4>There are no classrooms!</h4></div>
+</div>
+<hr>
+<div class="container">
+  <h2>Classroom Form:</h2>
+  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
+  <form (submit)="addcls()">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" name="name" class="form-control" [(ngModel)]="clsmodel.name">
+    </div>
+    <div class="form-group">
+      <label>Description (Insert support tools here)</label>
+      <input type="text" name="description" class="form-control" [(ngModel)]="clsmodel.description">
+    </div>
+    <div class="form-group">
+      <label>Longitude</label>
+      <input type="number" step="0.01" name="longitude" class="form-control" [(ngModel)]="clsmodel.longitude">
+    </div>
+    <div class="form-group">
+      <label>Latitude</label>
+      <input type="number" step="0.01" name="latitude" class="form-control" [(ngModel)]="clsmodel.latitude">
+    </div>
+    <button [disabled]="!(clsmodel.name) || !(clsmodel.description) || !(clsmodel.longitude) || !(clsmodel.latitude)" class="btn btn-block mb-4">Add Classroom</button>
+  </form>
+</div>

@@ -1,0 +1,55 @@
+<app-secrnavbar></app-secrnavbar>
+<div class="container">
+  <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
+</div>
+<div class="container">
+  <h2>Exams List</h2>
+  <table>
+    <tr>
+      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Teaching</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Classroom</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Date</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Hour</th>
+    </tr>
+    <tr *ngFor="let e of examslist">
+      <td>{{ examslist.indexOf(e)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ e.teaching.name }} ({{e.teaching.cfu}})</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ e.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ e.date }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ e.hour }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td><button class="btn btn-sm btn-secondary" (click)="editelem(e)">Edit</button></td>
+    </tr>
+  </table>
+  <div *ngIf="examslist.length == 0"><h4>There are no exams!</h4></div>
+</div>
+<hr>
+<div class="container">
+  <h2>Exam Form:</h2>
+  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
+  <form (submit)="addexam()">
+    <div class="form-group">
+      <label>Teaching</label>
+      <select name="teaching" class="form-control" [(ngModel)]="teachingmodel.idTeaching">
+        <option value=""></option>
+        <option *ngFor="let t of tlist" value="{{ t.idTeaching }}">{{ t.name }} ({{ t.user.name }} {{ t.user.surname }})</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Classroom</label>
+      <select name="classroom" class="form-control" [(ngModel)]="classroommodel.idClassroom">
+        <option value=""></option>
+        <option *ngFor="let c of clslist" value="{{ c.idClassroom }}">{{ c.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" name="date" class="form-control" [(ngModel)]="exammodel.date">
+    </div>
+    <div class="form-group">
+      <label>Hour</label>
+      <input type="text" name="hour" class="form-control" [(ngModel)]="exammodel.hour">
+    </div>
+    <button [disabled]="!(classroommodel) || !(teachingmodel) || !(exammodel.date) || !(exammodel.hour)" class="btn btn-block mb-4">Add Exam</button>
+  </form>
+</div>
