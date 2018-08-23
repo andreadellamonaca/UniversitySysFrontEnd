@@ -62,7 +62,7 @@
 <div class="container" *ngIf="!showeditform">
   <h2>New Lecture Form:</h2>
   <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
-  <form (submit)="addlecture()">
+  <form>
     <div class="form-group">
       <label>Classroom</label>
       <select name="classroom" class="form-control" [(ngModel)]="classroommodel.idClassroom">
@@ -102,6 +102,6 @@
       <label>End time</label>
       <input type="text" name="endhour" class="form-control" [(ngModel)]="endtimemodel">
     </div>
-    <button [disabled]="!(teachingmodel.idTeaching) || !(classroommodel.idClassroom) || !(startdatemodel) || !(enddatemodel) || !(starttimemodel) || !(endtimemodel)" class="btn btn-block mb-4">Add Lecture</button>
+    <button (click)="addlecture()" [disabled]="!(teachingmodel.idTeaching) || !(classroommodel.idClassroom) || !(startdatemodel) || !(enddatemodel) || !(starttimemodel) || !(endtimemodel)" class="btn btn-block mb-4">Add Lecture</button>
   </form>
 </div>

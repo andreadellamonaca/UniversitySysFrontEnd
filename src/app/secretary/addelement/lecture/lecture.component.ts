@@ -35,6 +35,7 @@ export class LectureComponent implements OnInit {
     {name: 'Thursday', checked: false},
     {name: 'Friday', checked: false}
     ];
+  bufferdate: Date;
 
   constructor(private router: Router, private teachingService: TeachingService, private lectureService: LectureService, private classroomService: ClassroomService) {
     this.teachingService.getAll().subscribe(list => {
@@ -44,6 +45,9 @@ export class LectureComponent implements OnInit {
     this.classroomService.getAll().subscribe(list => {
       this.clslist = list;
     });
+    const data = new Date(2018, 7, 24);
+    const neu = new Date(data.getTime() + (1000 * 60 * 60 * 24) );
+    console.log(neu);
   }
 
   ngOnInit() {
@@ -153,10 +157,21 @@ export class LectureComponent implements OnInit {
         this.lecturemodel.starttime = this.starttimemodel;
         this.lecturemodel.endtime = this.endtimemodel;
         this.lecturemodel.teaching = this.teachingmodel;
-        const date = new Date(this.startdatemodel);
-        console.log(this.weeklist[1].name);
-        const index = parseInt(this.startdatemodel.getDay().toLocaleString('en-us'), 10);
-        const startday = this.weeklist[index - 1].name;
+
+        this.bufferdate = new Date(this.startdatemodel);
+        const final = new Date(this.enddatemodel);
+        while (this.bufferdate.getTime() < final.getTime()) {
+          const index = parseInt(this.bufferdate.getDay().toLocaleString('en-us'), 10) - 1;
+          console.log('indice: ' + index);
+          if (index < 5 && index !== -1) {
+            console.log('ceccato: ' + this.weeklist[index].checked);
+            if (this.weeklist[index].checked) {
+              console.log('Salvo: ' + this.bufferdate);
+            }
+          }
+          this.bufferdate = new Date(this.bufferdate.getTime() + (1000 * 60 * 60 * 24) );
+          console.log('new day: ' + this.bufferdate);
+        }
       }
     }
   }
