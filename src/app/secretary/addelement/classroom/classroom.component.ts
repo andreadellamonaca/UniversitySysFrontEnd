@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Classroom} from '../../../models/classroom';
 import {ClassroomService} from '../../../services/classroom.service';
-import {User} from '../../../models/User';
 
 @Component({
   selector: 'app-classroom',
@@ -12,6 +11,7 @@ import {User} from '../../../models/User';
 export class ClassroomComponent implements OnInit {
   clslist: Classroom[] = [];
   clsmodel: Classroom = {};
+  showmap: boolean = false;
 
   constructor(private router: Router, private clsService: ClassroomService) {
     this.clsService.getAll().subscribe(list => {
@@ -44,4 +44,7 @@ export class ClassroomComponent implements OnInit {
     });
   }
 
+  openMap() {
+    this.showmap = !this.showmap;
+  }
 }

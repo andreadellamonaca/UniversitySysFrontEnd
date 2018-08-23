@@ -25,7 +25,7 @@
 <div class="container">
   <h2>Classroom Form:</h2>
   <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
-  <form (submit)="addcls()">
+  <form>
     <div class="form-group">
       <label>Name</label>
       <input type="text" name="name" class="form-control" [(ngModel)]="clsmodel.name">
@@ -34,6 +34,8 @@
       <label>Description (Insert support tools here)</label>
       <input type="text" name="description" class="form-control" [(ngModel)]="clsmodel.description">
     </div>
+    <button class="btn btn-block mb-4" (click)="openMap()">LatLon From Map</button>
+    <div *ngIf="showmap">abc</div>
     <div class="form-group">
       <label>Longitude</label>
       <input type="number" step="0.01" name="longitude" class="form-control" [(ngModel)]="clsmodel.longitude">
@@ -42,6 +44,6 @@
       <label>Latitude</label>
       <input type="number" step="0.01" name="latitude" class="form-control" [(ngModel)]="clsmodel.latitude">
     </div>
-    <button [disabled]="!(clsmodel.name) || !(clsmodel.description) || !(clsmodel.longitude) || !(clsmodel.latitude)" class="btn btn-block mb-4">Add Classroom</button>
+    <button (click)="addcls()" [disabled]="!(clsmodel.name) || !(clsmodel.description) || !(clsmodel.longitude) || !(clsmodel.latitude)" class="btn btn-block mb-4">Add Classroom</button>
   </form>
 </div>

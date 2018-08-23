@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Lecture} from '../models/lecture';
+
+const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +15,13 @@ export class LectureService {
 
   getByIdTeaching(idTeaching: number): Observable<Lecture[]> {
     return this.http.get<Lecture[]>(this.lectureurl + '/getLecturesByIdTeaching/' + idTeaching);
+  }
+
+  getByDate(date: Date): Observable<Lecture[]> {
+    return this.http.get<Lecture[]>(this.lectureurl + '/getLecturesByDate/' + date);
+  }
+
+  save(l: Lecture): Observable<Lecture> {
+    return this.http.post(this.lectureurl + '/save', l, {headers});
   }
 }

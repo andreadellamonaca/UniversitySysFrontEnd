@@ -26,6 +26,7 @@ import { UserComponent } from './secretary/addelement/user/user.component';
 import { TeachingComponent } from './secretary/addelement/teaching/teaching.component';
 import { ClassroomComponent } from './secretary/addelement/classroom/classroom.component';
 import { ExamComponent } from './secretary/addelement/exam/exam.component';
+import { LectureComponent } from './secretary/addelement/lecture/lecture.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ExamComponent } from './secretary/addelement/exam/exam.component';
     TeachingComponent,
     ClassroomComponent,
     ExamComponent,
+    LectureComponent,
   ],
   imports: [
     BrowserModule,
