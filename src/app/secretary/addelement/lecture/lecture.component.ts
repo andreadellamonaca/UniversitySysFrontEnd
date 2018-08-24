@@ -7,6 +7,7 @@ import {Lecture} from '../../../models/lecture';
 import {Classroom} from '../../../models/classroom';
 import {ClassroomService} from '../../../services/classroom.service';
 import {Timestamp} from 'rxjs';
+import {NotificationService} from '../../../services/notification.service';
 
 @Component({
   selector: 'app-lecture',
@@ -37,7 +38,12 @@ export class LectureComponent implements OnInit {
     ];
   bufferdate: Date;
 
-  constructor(private router: Router, private teachingService: TeachingService, private lectureService: LectureService, private classroomService: ClassroomService) {
+  constructor(private router: Router,
+              private teachingService: TeachingService,
+              private lectureService: LectureService,
+              private classroomService: ClassroomService,
+              private notifService: NotificationService) {
+
     this.teachingService.getAll().subscribe(list => {
       this.tlist = list;
       console.log(this.tlist);
@@ -45,9 +51,6 @@ export class LectureComponent implements OnInit {
     this.classroomService.getAll().subscribe(list => {
       this.clslist = list;
     });
-    const data = new Date(2018, 7, 24);
-    const neu = new Date(data.getTime() + (1000 * 60 * 60 * 24) );
-    console.log(neu);
   }
 
   ngOnInit() {
@@ -81,7 +84,12 @@ export class LectureComponent implements OnInit {
 
   editelem(l: Lecture) {
     this.showeditform = !this.showeditform;
-    this.lecturemodel = l;
+    if (this.lecturemodel.idLecture === l.idLecture ) {
+      this.lecturemodel.show_editform = !this.lecturemodel.show_editform;
+    } else {
+      this.lecturemodel = l;
+      this.lecturemodel.show_editform = true;
+    }
     this.classroommodel = l.classroom;
     this.datemodel = l.date;
     this.starttimemodel = l.starttime;
@@ -96,6 +104,9 @@ export class LectureComponent implements OnInit {
     this.startdatemodel = new Date();
     this.enddatemodel = new Date();
     this.teachingmodel = {};
+    for (const i of this.weeklist) {
+      i.checked = false;
+    }
   }
 
   editlecture() {
@@ -108,6 +119,9 @@ export class LectureComponent implements OnInit {
       this.lecturemodel.endtime = this.endtimemodel;
       this.lectureService.save(this.lecturemodel).subscribe(data => {
         console.log(data);
+        this.notifService.ModLectureNotification(this.lecturemodel).subscribe(not => {
+          console.log(not);
+        });
         this.cleanform();
         if (this.selecteddate != null) {
           this.lectureService.getByDate(this.selecteddate).subscribe(list => {
@@ -118,7 +132,7 @@ export class LectureComponent implements OnInit {
             this.lectureslist = list;
           });
         }
-        this.showeditform = !this.showeditform;
+        this.lecturemodel.show_editform = !this.lecturemodel.show_editform;
       });
     }
   }
@@ -160,20 +174,21 @@ export class LectureComponent implements OnInit {
 
         this.bufferdate = new Date(this.startdatemodel);
         const final = new Date(this.enddatemodel);
-        while (this.bufferdate.getTime() < final.getTime()) {
+        while (this.bufferdate.getTime() <= final.getTime()) {
           const index = parseInt(this.bufferdate.getDay().toLocaleString('en-us'), 10) - 1;
-          console.log('indice: ' + index);
           if (index < 5 && index !== -1) {
-            console.log('ceccato: ' + this.weeklist[index].checked);
             if (this.weeklist[index].checked) {
-              console.log('Salvo: ' + this.bufferdate);
+              this.lecturemodel.date = this.bufferdate;
+              this.lectureService.save(this.lecturemodel).subscribe(data => {
+                console.log(data);
+              });
             }
           }
           this.bufferdate = new Date(this.bufferdate.getTime() + (1000 * 60 * 60 * 24) );
-          console.log('new day: ' + this.bufferdate);
         }
       }
     }
+    this.cleanform();
   }
 
 }

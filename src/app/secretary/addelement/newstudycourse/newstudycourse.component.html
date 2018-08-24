@@ -8,12 +8,18 @@
     <tr>
       <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <th>Name</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Description</th>
+      <th>Description</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Academic Years</th>
     </tr>
     <tr *ngFor="let sc of sclist">
       <td>{{ sclist.indexOf(sc)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ sc.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ sc.description }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>
+        <div *ngFor="let cal of sc.calendars">
+          {{ cal.academicYear }},
+        </div>
+      </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td><button class="btn btn-sm btn-secondary" (click)="editelem(sc)">Edit</button></td>
     </tr>
   </table>
@@ -31,6 +37,15 @@
     <div class="form-group">
       <label>Description</label>
       <input type="text" name="description" class="form-control" [(ngModel)]="scmodel.description">
+    </div>
+    <div class="form-group">
+      <label>Associated Academic Year:</label>
+      <div *ngFor="let c of clist">
+        <label>
+          <input type="checkbox" name="calendar" value="{{ c.idCalendar }}" [checked]="c.checked" (change)="changestatus(c)">
+          {{ c.academicYear }}
+        </label>
+      </div>
     </div>
     <button [disabled]="!(scmodel.name) || !(scmodel.description)" class="btn btn-block mb-4">Add StudyCourse</button>
   </form>

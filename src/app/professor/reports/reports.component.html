@@ -3,6 +3,7 @@
   <button (click)="shownewReportForm()" class="btn btn-sm btn-secondary">Make a report</button>
   <div><br>
     <div *ngIf="showReportForm">
+      <button (click)="cleanform()" class="btn btn-sm btn-secondary">Clean form</button>
       <form (submit)="addReport(classroom.value)">
         <div class="form-group">
           <label>Description</label>
@@ -31,37 +32,53 @@
   <div *ngIf="!showmyReports">
     <h2>My Reports</h2>
     <div *ngIf="reports.length > 0">
-      <div class="card" *ngFor="let r of reports">
-        <div class="card-body">
-          <h3>Description: {{ r.problemDescription }}</h3>
-          <p><button (click)="toggleHide(r)" class="btn btn-sm btn-secondary">Show report detail</button></p>
-          <ul  *ngIf="r.hide">
-            <li>Classroom: {{ r.classroom.name }}</li>
-            <li>State: {{ r.reportstatus.name }}</li>
-            <li>Note By Secretary: {{ r.note }}</li>
-          </ul>
-        </div>
-      </div>
+      <table>
+        <tr>
+          <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Secretary</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Classroom</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Description</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Status</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Note</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </tr>
+        <tr *ngFor="let r of reports">
+          <td>{{ reports.indexOf(r)+1 }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td *ngIf="r.reportstatus.name != 'in pending'">{{ r.userBySecretaryIdSecretary.name }} {{ r.userBySecretaryIdSecretary.surname }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td *ngIf="r.reportstatus.name == 'in pending'">none</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ r.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ r.problemDescription }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ r.reportstatus.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ r.note }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </tr>
+      </table>
+      <div *ngIf="reports.length == 0"><h4>You do not have reports!</h4></div>
     </div>
-    <br>
-    <div *ngIf="reports.length == 0"><h4>You do not have reports!</h4></div>
   </div>
   <div *ngIf="!showReportsByCls">
     <h2>Reports about the selected classroom</h2>
     <div *ngIf="reportsByCls.length > 0">
-      <div class="card" *ngFor="let q of reportsByCls">
-        <div class="card-body">
-          <h3>Description: {{ q.problemDescription }}, Professor: {{ q.userByProfessorIdProfessor.name }} {{ q.userByProfessorIdProfessor.surname }}</h3>
-          <p><button (click)="toggleHide(q)" class="btn btn-sm btn-secondary">Show report detail</button></p>
-          <ul  *ngIf="q.hide">
-            <li>Classroom: {{ q.classroom.name }}</li>
-            <li>State: {{ q.reportstatus.name }}</li>
-            <li>Note By Secretary: {{ q.note }}</li>
-          </ul>
-        </div>
-      </div>
+      <table>
+        <tr>
+          <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Secretary</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Professor</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Classroom</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Description</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Status</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <th>Note</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </tr>
+        <tr *ngFor="let q of reportsByCls">
+          <td>{{ reportsByCls.indexOf(q)+1 }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td *ngIf="q.reportstatus.name != 'in pending'">{{ q.userBySecretaryIdSecretary.name }} {{ q.userBySecretaryIdSecretary.surname }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td *ngIf="q.reportstatus.name == 'in pending'">none</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ q.userByProfessorIdProfessor.name }} {{ q.userByProfessorIdProfessor.surname }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ q.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ q.problemDescription }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ q.reportstatus.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td>{{ q.note }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </tr>
+      </table>
+      <div *ngIf="reportsByCls.length == 0"><h4>There is no reports about the selected classroom!</h4></div>
     </div>
-    <br>
-    <div *ngIf="reportsByCls.length == 0"><h4>There is no reports about the selected classroom!</h4></div>
   </div>
 </div>

@@ -1,3 +1,5 @@
+import {Calendar} from './calendar';
+
 export interface StudyCourse {
 
   idStudyCourse?: number;
@@ -5,4 +7,5 @@ export interface StudyCourse {
   description?: string;
   editform?: boolean;
   checked?: boolean;
+  calendars?: Calendar[];
 }

@@ -32,4 +32,12 @@ export class ReportService {
   getReportsByIdClassroom(idClassroom: number): Observable<Report[]> {
     return this.http.get<Report[]>(this.reporturl + '/getReportsByIdClassroom/' + idClassroom);
   }
+
+  getPendingReports(): Observable<Report[]> {
+    return this.http.get<Report[]>(this.reporturl + '/getPendingReports');
+  }
+
+  getReportsByIdSecretary(idSecretary: number): Observable<Report[]> {
+    return this.http.get<Report[]>(this.reporturl + '/getReportsByIdSecretary/' + idSecretary);
+  }
 }

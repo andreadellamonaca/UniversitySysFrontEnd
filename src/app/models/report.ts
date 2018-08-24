@@ -5,11 +5,11 @@ import {ReportStatus} from './report-status';
 export interface Report {
 
   idReport?: number;
-  classroom: Classroom;
+  classroom?: Classroom;
   reportstatus?: ReportStatus;
   userBySecretaryIdSecretary?: User;
-  userByProfessorIdProfessor: User;
-  problemDescription: string;
+  userByProfessorIdProfessor?: User;
+  problemDescription?: string;
   note?: string;
   hide?: boolean;
 }

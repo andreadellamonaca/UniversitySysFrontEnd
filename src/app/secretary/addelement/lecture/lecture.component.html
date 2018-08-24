@@ -12,6 +12,7 @@
     <option *ngFor="let t of tlist" value="{{ t.idTeaching }}">{{ t.name }} ({{ t.user.name }} {{ t.user.surname }})</option>
   </select>&nbsp;&nbsp;&nbsp;
   <button class="btn btn-sm btn-secondary" (click)="showbyteaching()">Show By Teaching</button>
+  <br><br>
   <table>
     <tr>
       <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -34,7 +35,7 @@
   <div *ngIf="lectureslist.length == 0"><h4>There are no lectures!</h4></div>
 </div>
 <hr>
-<div class="container" *ngIf="showeditform">
+<div class="container" *ngIf="lecturemodel.show_editform">
   <h2>Edit Lecture Form:</h2>
   <form (submit)="editlecture()">
     <div class="form-group">
@@ -59,7 +60,7 @@
     <button [disabled]="!(classroommodel.idClassroom) || !(datemodel) || !(starttimemodel) || !(endtimemodel)" class="btn btn-block mb-4">Edit Lecture</button>
   </form>
 </div>
-<div class="container" *ngIf="!showeditform">
+<div class="container" *ngIf="!lecturemodel.show_editform">
   <h2>New Lecture Form:</h2>
   <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
   <form>

@@ -37,8 +37,8 @@
       <input type="text" name="name" class="form-control" [(ngModel)]="teachingmodel.name">
     </div>
     <div class="form-group">
-      <label>CFU (A positive number)</label>
-      <input type="number" name="cfu" class="form-control" [(ngModel)]="teachingmodel.cfu">
+      <label>CFU</label>
+      <input type="number" name="cfu" min="1" class="form-control" [(ngModel)]="teachingmodel.cfu">
     </div>
     <div class="form-group">
       <label>Professor</label>
@@ -56,6 +56,6 @@
         </label>
       </div>
     </div>
-    <button [disabled]="!(teachingmodel.name) || !(teachingmodel.cfu > 0) || !(profmodel.idUser)" class="btn btn-block mb-4">Add Teaching</button>
+    <button [disabled]="!(teachingmodel.name) || !(profmodel.idUser)" class="btn btn-block mb-4">Add Teaching</button>
   </form>
 </div>

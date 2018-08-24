@@ -27,6 +27,8 @@ import { TeachingComponent } from './secretary/addelement/teaching/teaching.comp
 import { ClassroomComponent } from './secretary/addelement/classroom/classroom.component';
 import { ExamComponent } from './secretary/addelement/exam/exam.component';
 import { LectureComponent } from './secretary/addelement/lecture/lecture.component';
+import { CalendarComponent } from './secretary/addelement/calendar/calendar.component';
+import { ReportmanagerComponent } from './secretary/reportmanager/reportmanager.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { LectureComponent } from './secretary/addelement/lecture/lecture.compone
     ClassroomComponent,
     ExamComponent,
     LectureComponent,
+    CalendarComponent,
+    ReportmanagerComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import {User} from '../../models/User';
 import {ReportService} from '../../services/report.service';
 import {Classroom} from '../../models/classroom';
 import {ClassroomService} from '../../services/classroom.service';
+import {ReportStatus} from '../../models/report-status';
 
 @Component({
   selector: 'app-reports',
@@ -70,9 +71,21 @@ export class ReportsComponent implements OnInit {
   addReport(classroom) {
     this.postreport.classroom.idClassroom = classroom;
     this.postreport.userByProfessorIdProfessor.idUser = this.currentUser.idUser;
+    this.postreport.userBySecretaryIdSecretary = null;
+    const rs: ReportStatus = {idreportStatus: 1};
+    this.postreport.reportstatus = rs;
+    console.log(this.postreport);
     this.reportService.addnewReport(this.postreport).subscribe(rep => {
+      this.cleanform();
       alert('Report sent!');
+      this.reportService.getReportsByIdProfessor(this.currentUser.idUser).subscribe(reports => {
+        this.reports = reports;
+      });
     });
+  }
+
+  cleanform() {
+    this.postreport.problemDescription = '';
   }
 
 }

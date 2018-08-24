@@ -15,6 +15,8 @@ import {TeachingComponent} from './secretary/addelement/teaching/teaching.compon
 import {ClassroomComponent} from './secretary/addelement/classroom/classroom.component';
 import {ExamComponent} from './secretary/addelement/exam/exam.component';
 import {LectureComponent} from './secretary/addelement/lecture/lecture.component';
+import {CalendarComponent} from './secretary/addelement/calendar/calendar.component';
+import {ReportmanagerComponent} from './secretary/reportmanager/reportmanager.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,6 +27,8 @@ const routes: Routes = [
   {path: 'professor/reports', component: ReportsComponent},
   {path: 'secretary', component: SecretaryComponent},
   {path: 'secretary/newelem', component: AddelementComponent},
+  {path: 'secretary/reports', component: ReportmanagerComponent},
+  {path: 'secretary/newelem/calendar', component: CalendarComponent},
   {path: 'secretary/newelem/studycourse', component: NewstudycourseComponent},
   {path: 'secretary/newelem/user', component: UserComponent},
   {path: 'secretary/newelem/teaching', component: TeachingComponent},

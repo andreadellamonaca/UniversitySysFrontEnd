@@ -12,6 +12,7 @@ export class AddelementComponent implements OnInit {
 
   constructor(private router: Router) {
     this.list = [
+      { title: 'Calendar', url: 'secretary/newelem/calendar' },
       { title: 'Study Course', url: 'secretary/newelem/studycourse'},
       { title: 'User', url: 'secretary/newelem/user' },
       { title: 'Teaching', url: 'secretary/newelem/teaching' },

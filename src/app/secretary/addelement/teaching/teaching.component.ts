@@ -49,6 +49,9 @@ export class TeachingComponent implements OnInit {
   cleanform() {
     this.teachingmodel = {};
     this.profmodel = {};
+    for (const i of this.sclist) {
+      i.checked = false;
+    }
   }
 
   changestatus(sc: StudyCourse) {

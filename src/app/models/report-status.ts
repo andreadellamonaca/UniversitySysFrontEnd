@@ -1,4 +1,4 @@
 export interface ReportStatus {
-  idReport: number;
-  name: string;
+  idreportStatus?: number;
+  name?: string;
 }
