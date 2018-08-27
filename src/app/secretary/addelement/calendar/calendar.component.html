@@ -1,0 +1,34 @@
+<app-secrnavbar></app-secrnavbar>
+<div class="container">
+  <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
+</div>
+<div class="container">
+  <h2>Calendar List</h2>
+  <table>
+    <tr>
+      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>AcademicYear</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </tr>
+    <tr *ngFor="let c of clist">
+      <td>{{ clist.indexOf(c)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ c.academicYear }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </tr>
+  </table>
+  <div *ngIf="clist.length == 0"><h4>There are no academic years!</h4></div>
+</div>
+<hr>
+<div class="container">
+  <h2>Calendar Form:</h2>
+  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
+  <form (submit)="addcalendar()">
+    <div class="form-group">
+      <label>Start Academic year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="number" name="start" min="{{ currentyear }}" max="2099" step="1" [(ngModel)]="startyearmodel" />
+    </div>
+    <div class="form-group">
+      <label>End Academic year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="number" name="end" min="{{ currentyear+1 }}" max="2099" step="1" [(ngModel)]="endyearmodel" />
+    </div>
+    <button class="btn btn-block mb-4">Add Calendar</button>
+  </form>
+</div>
