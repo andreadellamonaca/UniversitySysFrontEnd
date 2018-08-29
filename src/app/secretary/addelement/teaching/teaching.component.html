@@ -10,6 +10,7 @@
       <th>Name</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <th>CFU</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <th>Professor</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <th>Course Year</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <th>Study Course</th>
     </tr>
     <tr *ngFor="let t of tlist">
@@ -17,6 +18,7 @@
       <td>{{ t.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ t.cfu }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ t.user.name }} {{ t.user.surname }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <td>{{ t.courseYear }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>
         <div *ngFor="let sc of t.studycourses">
           {{ sc.name }},
@@ -39,6 +41,10 @@
     <div class="form-group">
       <label>CFU</label>
       <input type="number" name="cfu" min="1" class="form-control" [(ngModel)]="teachingmodel.cfu">
+    </div>
+    <div class="form-group">
+      <label>Course year</label>
+      <input type="number" name="course year" min="1" max="3" class="form-control" [(ngModel)]="teachingmodel.courseYear">
     </div>
     <div class="form-group">
       <label>Professor</label>

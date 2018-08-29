@@ -7,5 +7,6 @@ export interface Teaching {
   user?: User;
   name?: string;
   cfu?: number;
+  courseYear?: number;
   studycourses?: StudyCourse[];
 }

@@ -11,5 +11,6 @@ export interface User {
   studycourse?: StudyCourse;
   surname?: string;
   usertype?: UserType;
+  courseYear?: number;
   teachinglist?: Teaching[];
 }

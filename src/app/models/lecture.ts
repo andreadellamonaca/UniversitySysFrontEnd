@@ -10,7 +10,6 @@ export interface Lecture {
   date?: Date;
   starttime?: string;
   endtime?: string;
-  description?: string;
   tmaterials?: TeachingMaterial[];
   hide_material?: boolean;
   av_rating?: number;
