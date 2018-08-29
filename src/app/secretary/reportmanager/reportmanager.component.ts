@@ -36,6 +36,10 @@ export class ReportmanagerComponent implements OnInit {
   ngOnInit() {
   }
 
+  cleanform() {
+    this.reportmodel = {};
+  }
+
   take(r: Report) {
     this.reportmodel.idReport = r.idReport;
     const rs: ReportStatus = {idreportStatus: 3};
@@ -71,6 +75,7 @@ export class ReportmanagerComponent implements OnInit {
       console.log(data);
       this.notService.ModReportNotification(this.reportmodel).subscribe(notif => {
         console.log(notif);
+        this.cleanform();
       });
       this.reportService.getReportsByIdSecretary(this.currentUser.idUser).subscribe(list => {
         this.myreports = list;

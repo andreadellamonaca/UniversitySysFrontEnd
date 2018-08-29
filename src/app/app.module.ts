@@ -29,6 +29,7 @@ import { ExamComponent } from './secretary/addelement/exam/exam.component';
 import { LectureComponent } from './secretary/addelement/lecture/lecture.component';
 import { CalendarComponent } from './secretary/addelement/calendar/calendar.component';
 import { ReportmanagerComponent } from './secretary/reportmanager/reportmanager.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [

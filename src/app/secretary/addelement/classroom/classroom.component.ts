@@ -11,7 +11,6 @@ import {ClassroomService} from '../../../services/classroom.service';
 export class ClassroomComponent implements OnInit {
   clslist: Classroom[] = [];
   clsmodel: Classroom = {};
-  showmap: boolean = false;
 
   constructor(private router: Router, private clsService: ClassroomService) {
     this.clsService.getAll().subscribe(list => {
@@ -44,7 +43,4 @@ export class ClassroomComponent implements OnInit {
     });
   }
 
-  openMap() {
-    this.showmap = !this.showmap;
-  }
 }

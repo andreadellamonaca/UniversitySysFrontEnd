@@ -35,7 +35,7 @@
             <option value="File">File</option>
           </select>
           <div *ngIf="t_material.type ==='Link' && t_material.lecture.idLecture == l.idLecture">
-            <form (submit)="uploadLink(l.idLecture)">
+            <form (submit)="uploadLink(l)">
               <div class="form-group">
                 <label>Resource name:</label>
                 <input type="text" name="resource_name" class="form-control" [(ngModel)]="t_material.name">
@@ -49,7 +49,7 @@
           </div>
           <div *ngIf="t_material.type ==='File' && t_material.lecture.idLecture == l.idLecture">
             <input type="file" (change)="getFile($event)" class="form-control" id ="myFileField"/>
-            <button  mat-raised-button color="primary" class="add-files-btn" (click)="uploadFile(l.idLecture)">Add Files</button>
+            <button  mat-raised-button color="primary" class="add-files-btn" (click)="uploadFile(l)">Add Files</button>
           </div>
 
         </div>

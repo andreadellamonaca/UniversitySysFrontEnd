@@ -70,27 +70,27 @@ export class TeachingDetailComponent implements OnInit {
     });
   }
 
-  uploadFile(lectureid) {
+  uploadFile(l: Lecture) {
     const formData = new FormData();
     formData.append('file', this.file, this.file.name);
-    formData.append('lectureid', lectureid);
+    formData.append('lectureid', JSON.stringify(l.idLecture));
     formData.append('userid', this.currentUser.idUser.toString());
     this.tmaterialService.saveFile(formData).subscribe(tm => {
       console.log(tm);
-      this.notService.NewMaterialNotification(this.teaching).subscribe(data => {
+      this.notService.NewMaterialNotification(this.teaching, l).subscribe(data => {
         console.log(data);
       });
       alert('File uploaded correctly!');
     });
   }
 
-  uploadLink(lectureid: number) {
+  uploadLink(l: Lecture) {
     this.t_material.user.idUser = this.currentUser.idUser;
-    this.t_material.lecture.idLecture = lectureid;
+    this.t_material.lecture.idLecture = l.idLecture;
     console.log(this.t_material);
     this.tmaterialService.saveLink(this.t_material).subscribe(tm => {
       console.log(tm);
-      this.notService.NewMaterialNotification(this.teaching).subscribe(data => {
+      this.notService.NewMaterialNotification(this.teaching, l).subscribe(data => {
         console.log(data);
       });
       alert('Link uploaded correctly!');

@@ -17,11 +17,13 @@ export class NotificationService {
 
   constructor(private http: HttpClient) { }
 
-  NewMaterialNotification(teaching: Teaching): Observable<Notification> {
+  NewMaterialNotification(teaching: Teaching, l: Lecture): Observable<Notification> {
     const notification: Notification = {
       head: teaching.name,
       body: 'New material available for: ' + teaching.name,
       token_topic: teaching.name,
+      type: 'Teaching Material',
+      extra: JSON.stringify(l)
     };
     return this.http.post<Notification>(this.notificationurl + '/toTopic', notification, {headers});
   }
@@ -31,6 +33,8 @@ export class NotificationService {
       head: l.teaching.name,
       body: 'Lecture of' + l.date + ' (' + l.starttime + '-' + l.endtime + ') has changed!',
       token_topic: l.teaching.name,
+      type: 'Lecture',
+      extra: JSON.stringify(l.teaching)
     };
     return this.http.post<Notification>(this.notificationurl + '/toTopic', notification, {headers});
   }
@@ -38,8 +42,10 @@ export class NotificationService {
   ModReportNotification(r: Report): Observable<Notification> {
     const notification: Notification = {
       head: 'Your report: ' + r.problemDescription,
-      body: 'Classroom ' + r.classroom.name + ' has changed!',
+      body: 'Report about classroom' + r.classroom.name + ' has changed!',
       token_topic: r.userByProfessorIdProfessor.email,
+      type: 'Report',
+      extra: ''
     };
     return this.http.post<Notification>(this.notificationurl + '/toUser', notification, {headers});
   }
