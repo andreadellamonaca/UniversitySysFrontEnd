@@ -44,8 +44,8 @@ export class TeachingDetailComponent implements OnInit {
 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    const name: string = this.route.snapshot.paramMap.get('name');
-    this.teachingService.getTeachingDetail(name).subscribe(teaching => {
+    const id: number = parseInt(this.route.snapshot.paramMap.get('idTeaching'), 10);
+    this.teachingService.getTeachingDetail(id).subscribe(teaching => {
       this.teaching = teaching;
       this.lectureService.getByIdTeaching(this.teaching.idTeaching).subscribe(lectures => {
         this.lectures = lectures;

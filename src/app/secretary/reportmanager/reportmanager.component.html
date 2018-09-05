@@ -56,7 +56,7 @@
       <label>Note</label>
       <input type="text" name="note" class="form-control" [(ngModel)]="reportmodel.note">
     </div>
-    <button [disabled]="((reportmodel.reportstatus.idreportStatus == 4) || (reportmodel.reportstatus.idreportStatus == 5)) && !(reportmodel.note) || !(reportmodel.reportstatus.idreportStatus)" class="btn btn-block mb-4">Modify Report</button>
+    <button [disabled]="((reportmodel.reportstatus.idreportStatus == 4) || (reportmodel.reportstatus.idreportStatus == 5)) && !(reportmodel.note) || (reportmodel.reportstatus.idreportStatus == 3)" class="btn btn-block mb-4">Modify Report</button>
   </form>
 </div>
 

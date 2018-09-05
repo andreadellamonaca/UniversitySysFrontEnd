@@ -13,7 +13,9 @@ import {Calendar} from '../../../models/calendar';
 })
 export class NewstudycourseComponent implements OnInit {
   sclist: StudyCourse[] = [];
-  scmodel: StudyCourse = {};
+  scmodel: StudyCourse = {
+    calendars: []
+  };
   calendarsmodel: Calendar[] = [];
   clist: Calendar[] = [];
 
@@ -57,6 +59,12 @@ export class NewstudycourseComponent implements OnInit {
   }
 
   addsc() {
+    for (const i of this.sclist) {
+      if (i.name === this.scmodel.name && this.scmodel.idStudyCourse === undefined) {
+        alert('Error! This StudyCourse already exists');
+        return;
+      }
+    }
     let count = 0;
     for (const i of this.clist) {
       if (i.checked === true) {

@@ -34,6 +34,12 @@ export class ClassroomComponent implements OnInit {
   }
 
   addcls() {
+    for (const i of this.clslist) {
+      if (i.name === this.clsmodel.name && this.clsmodel.idClassroom === undefined) {
+        alert('Error! This Classroom already exists');
+        return;
+      }
+    }
     this.clsService.save(this.clsmodel).subscribe(data => {
       console.log(data);
       this.clsService.getAll().subscribe(list => {

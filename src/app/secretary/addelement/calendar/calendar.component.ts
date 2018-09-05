@@ -39,6 +39,12 @@ export class CalendarComponent implements OnInit {
       alert('Error! Modify the academic year field');
     } else {
       this.cmodel.academicYear = this.startyearmodel + '-' + this.endyearmodel;
+      for (const i of this.clist) {
+        if (i.academicYear === this.cmodel.academicYear) {
+          alert('Error! This Academic Year already exists!');
+          return;
+        }
+      }
       this.calendarService.save(this.cmodel).subscribe(data => {
         console.log(data);
         this.cleanform();

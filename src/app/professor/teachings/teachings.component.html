@@ -4,7 +4,7 @@
   <div *ngIf="teachings.length > 0">
     <div class="card" *ngFor="let t of teachings">
       <div class="card-body">
-        <h3><a routerLink="/professor/teachings/{{t.name}}">{{ t.name }}</a></h3>
+        <h3><a routerLink="/professor/teachings/{{t.idTeaching}}">{{ t.name }}</a></h3>
         <p>CFU: {{ t.cfu }}</p>
         <p>CourseYear: {{ t.courseYear }}</p>
     </div>

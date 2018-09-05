@@ -46,13 +46,19 @@ export class UserComponent implements OnInit {
 
   addprof() {
     this.usermodel.usertype = this.usertypemodel;
+    for (const i of this.professorslist) {
+      if (i.email === this.usermodel.email) {
+        alert('Error! This email already exists!');
+        return;
+      }
+    }
     this.userService.save(this.usermodel).subscribe(data => {
       console.log(data);
       this.userService.getAllProfessors().subscribe(list => {
         this.professorslist = list;
         for (const i of this.professorslist) {
-          this.teachingService.getTeachingsByIdProfessor(i.idUser).subscribe(list => {
-            i.teachinglist = list;
+          this.teachingService.getTeachingsByIdProfessor(i.idUser).subscribe(tlist => {
+            i.teachinglist = tlist;
           });
         }
       });
