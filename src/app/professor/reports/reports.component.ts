@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Report} from '../../models/report';
 import {User} from '../../models/User';
 import {ReportService} from '../../services/report.service';
 import {Classroom} from '../../models/classroom';
 import {ClassroomService} from '../../services/classroom.service';
 import {ReportStatus} from '../../models/report-status';
+import {ModalDismissReasons, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-reports',
@@ -27,8 +28,11 @@ export class ReportsComponent implements OnInit {
   showmyReports: boolean = false;
   showReportsByCls: boolean = true;
 
+  modalRef: NgbModalRef;
+
   constructor(private reportService: ReportService,
-              private classroomService: ClassroomService) { }
+              private classroomService: ClassroomService,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -47,8 +51,14 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  shownewReportForm() {
+  shownewReportForm(content) {
     this.showReportForm = !this.showReportForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addReport(result);
+      }
+    });
   }
 
   eventmyReports() {

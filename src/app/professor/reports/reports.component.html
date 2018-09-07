@@ -1,26 +1,30 @@
-<app-profnavbar></app-profnavbar>
-<div class="container">
-  <button (click)="shownewReportForm()" class="btn btn-sm btn-secondary">Make a report</button>
-  <div><br>
-    <div *ngIf="showReportForm">
-      <button (click)="cleanform()" class="btn btn-sm btn-secondary">Clean form</button>
-      <form (submit)="addReport(classroom.value)">
-        <div class="form-group">
-          <label>Description</label>
-          <input type="text" name="description" class="form-control" [(ngModel)]="postreport.problemDescription">
-        </div>
-        <div class="form-group">
-          <label>Classroom</label>
-          <select name="classroom" class="form-control" #classroom>
-            <option *ngFor="let c of classrooms" value="{{ c.idClassroom }}">{{ c.name }}</option>
-          </select>
-        </div>
-        <button [disabled]="!postreport.problemDescription" class="btn btn-block mb-4">Add report</button>
-      </form>
-    </div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Make a report</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-</div>
-<br>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" name="description" class="form-control" [(ngModel)]="postreport.problemDescription">
+      </div>
+      <div class="form-group">
+        <label>Classroom</label>
+        <select name="classroom" class="form-control" #classroom>
+          <option *ngFor="let c of classrooms" value="{{ c.idClassroom }}">{{ c.name }}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!postreport.problemDescription" (click)="this.modalRef.close(classroom.value)" class="btn btn-block mb-4">Add report</button>
+  </div>
+</ng-template>
+
+<app-profnavbar></app-profnavbar>
 <div class="container">
   <button [disabled]="!showmyReports" (click)="eventmyReports()" class="btn btn-sm btn-secondary">Show My reports</button>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -82,3 +86,9 @@
     </div>
   </div>
 </div>
+<br>
+<div class="container">
+  <button (click)="shownewReportForm(content)" class="btn btn-sm btn-secondary">Make a report</button>
+  <br>
+</div>
+<br>

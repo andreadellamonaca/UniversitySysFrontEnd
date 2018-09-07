@@ -5,6 +5,7 @@ import {User} from '../../models/User';
 import {ReportstatusService} from '../../services/reportstatus.service';
 import {ReportStatus} from '../../models/report-status';
 import {NotificationService} from '../../services/notification.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-reportmanager',
@@ -18,7 +19,10 @@ export class ReportmanagerComponent implements OnInit {
   reportmodel: Report = {hide: true};
   rslist: ReportStatus[] = [];
 
-  constructor(private reportService: ReportService, private rstatusService: ReportstatusService, private notService: NotificationService) {
+  modalRef: NgbModalRef;
+
+  constructor(private reportService: ReportService, private rstatusService: ReportstatusService,
+              private notService: NotificationService, private modalService: NgbModal) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.reportService.getPendingReports().subscribe(list => {
       this.pendingReports = list;
@@ -61,13 +65,14 @@ export class ReportmanagerComponent implements OnInit {
     });
   }
 
-  modify(r: Report) {
-    if (this.reportmodel.idReport === r.idReport ) {
-      this.reportmodel.hide = !this.reportmodel.hide;
-    } else {
-      this.reportmodel = r;
-      this.reportmodel.hide = false;
-    }
+  modify(r: Report, content) {
+    this.reportmodel = r;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.editreport();
+      }
+    });
   }
 
   editreport() {

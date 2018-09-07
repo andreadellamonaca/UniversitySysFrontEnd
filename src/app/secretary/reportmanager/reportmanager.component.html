@@ -18,6 +18,7 @@
   </table>
   <div *ngIf="pendingReports.length == 0"><h4>There are no pending reports!</h4></div>
 </div>
+<hr>
 <div class="container">
   <h2>Your Reports</h2>
   <table>
@@ -36,27 +37,38 @@
       <td>{{ r.problemDescription }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ r.reportstatus.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ r.note }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" [disabled]="!(r.reportstatus.name != 'refused' && r.reportstatus.name != 'resolved')" (click)="modify(r)">Modify</button></td>
+      <td><button class="btn btn-sm btn-secondary" [disabled]="!(r.reportstatus.name != 'refused' && r.reportstatus.name != 'resolved')" (click)="modify(r, content)">Modify</button></td>
     </tr>
   </table>
   <div *ngIf="myreports.length == 0"><h4>There are no reports for you!</h4></div>
 </div>
-<hr>
-<div class="container" *ngIf="!(reportmodel.hide)">
-  <h2>Edit Report Form:</h2>
-  <form (submit)="editreport()">
-    <div class="form-group">
-      <label>Report status</label>
-      <select name="prof" class="form-control" [(ngModel)]="reportmodel.reportstatus.idreportStatus">
-        <option value=""></option>
-        <option *ngFor="let rs of rslist" value="{{ rs.idreportStatus }}">{{ rs.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Note</label>
-      <input type="text" name="note" class="form-control" [(ngModel)]="reportmodel.note">
-    </div>
-    <button [disabled]="((reportmodel.reportstatus.idreportStatus == 4) || (reportmodel.reportstatus.idreportStatus == 5)) && !(reportmodel.note) || (reportmodel.reportstatus.idreportStatus == 3)" class="btn btn-block mb-4">Modify Report</button>
-  </form>
-</div>
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Report Form:</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Report status</label>
+        <select name="prof" class="form-control" [(ngModel)]="reportmodel.reportstatus.idreportStatus">
+          <option value="-1"></option>
+          <option *ngFor="let rs of rslist" value="{{ rs.idreportStatus }}">{{ rs.name}}</option>
+        </select>
+      </div>
+      <div *ngIf="((reportmodel.reportstatus.idreportStatus == 4) || (reportmodel.reportstatus.idreportStatus == 5)) && !(reportmodel.note)">
+        <label>Please insert a motivation!</label>
+      </div>
+      <div class="form-group">
+        <label>Note</label>
+        <input type="text" name="note" class="form-control" [(ngModel)]="reportmodel.note">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="this.modalRef.close('save')" [disabled]="((reportmodel.reportstatus.idreportStatus == 4) || (reportmodel.reportstatus.idreportStatus == 5) || (reportmodel.reportstatus.idreportStatus == -1)) && !(reportmodel.note) || (reportmodel.reportstatus.idreportStatus == 3)" class="btn btn-block mb-4">Modify Report</button>
+  </div>
+</ng-template>
