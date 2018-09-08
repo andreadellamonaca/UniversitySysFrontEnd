@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Report} from '../models/report';
 import {StudyCourse} from '../models/study-course';
+import {Variables} from '../Variables';
 
 const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 
@@ -10,7 +11,7 @@ const headers = new HttpHeaders({'Content-Type' : 'application/json'});
   providedIn: 'root'
 })
 export class StudycourseService {
-  scurl = 'http://localhost:8080/Project_university/studycourse';
+  scurl = `${Variables.ServerURL}/studycourse`;
 
   constructor(private http: HttpClient) { }
 

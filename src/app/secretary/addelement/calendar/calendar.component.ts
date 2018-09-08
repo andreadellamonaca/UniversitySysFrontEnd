@@ -66,6 +66,6 @@ export class CalendarComponent implements OnInit {
       if (result != null) {
         this.addcalendar();
       }
-    });
+    }, reason => {});
   }
 }

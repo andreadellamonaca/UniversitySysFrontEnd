@@ -5,6 +5,7 @@ import {Notification} from '../models/notification';
 import {Teaching} from '../models/teaching';
 import {Lecture} from '../models/lecture';
 import {Report} from '../models/report';
+import {Variables} from '../Variables';
 
 const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 
@@ -13,7 +14,7 @@ const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 })
 export class NotificationService {
 
-  notificationurl = 'http://localhost:8080/Project_university/notification';
+  notificationurl = `${Variables.ServerURL}/notification`;
 
   constructor(private http: HttpClient) { }
 

@@ -3,13 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Lecturerating} from '../models/lecturerating';
 import {Materialrating} from '../models/materialrating';
+import {Variables} from '../Variables';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RatingService {
-  lessonratingurl = 'http://localhost:8080/Project_university/lecturesatisfaction/';
-  materialratingurl = 'http://localhost:8080/Project_university/materialsatisfaction/';
+  lessonratingurl = `${Variables.ServerURL}/lecturesatisfaction/`;
+  materialratingurl = `${Variables.ServerURL}/materialsatisfaction/`;
 
   constructor(private http: HttpClient) { }
 

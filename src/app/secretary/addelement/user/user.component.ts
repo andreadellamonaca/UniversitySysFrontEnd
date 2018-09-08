@@ -74,6 +74,6 @@ export class UserComponent implements OnInit {
       if (result != null) {
         this.addprof();
       }
-    });
+    }, reason => {});
   }
 }

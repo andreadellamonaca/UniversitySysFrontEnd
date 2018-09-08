@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Calendar} from '../models/calendar';
+import {Variables} from '../Variables';
 
 const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 
@@ -9,7 +10,7 @@ const headers = new HttpHeaders({'Content-Type' : 'application/json'});
   providedIn: 'root'
 })
 export class CalendarService {
-  calendarurl = 'http://localhost:8080/Project_university/calendar';
+  calendarurl = `${Variables.ServerURL}/calendar`;
 
   constructor(private http: HttpClient) { }
 

@@ -212,7 +212,7 @@ export class LectureComponent implements OnInit {
       if (result != null) {
         this.addlecture();
       }
-    });
+    }, reason => {});
   }
 
 }

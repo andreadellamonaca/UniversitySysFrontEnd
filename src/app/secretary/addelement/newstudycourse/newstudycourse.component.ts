@@ -69,7 +69,7 @@ export class NewstudycourseComponent implements OnInit {
       if (result != null) {
         this.addsc();
       }
-    });
+    }, reason => {});
   }
   addsc() {
     this.scmodel.calendars = [];
@@ -133,7 +133,7 @@ export class NewstudycourseComponent implements OnInit {
       if (result != null) {
         this.addsc();
       }
-    });
+    }, reason => {});
   }
 
 }

@@ -89,7 +89,7 @@ export class TeachingComponent implements OnInit {
       if (result != null) {
         this.addteaching();
       }
-    });
+    }, reason => {});
   }
 
   addteaching() {
@@ -129,12 +129,13 @@ export class TeachingComponent implements OnInit {
   }
 
   showTeachingForm(content) {
+    this.cleanform();
     this.showForm = !this.showForm;
     this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     this.modalRef.result.then((result) => {
       if (result != null) {
         this.addteaching();
       }
-    });
+    }, reason => {});
   }
 }

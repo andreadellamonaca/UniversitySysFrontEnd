@@ -41,7 +41,7 @@ export class ClassroomComponent implements OnInit {
       if (result != null) {
         this.addcls();
       }
-    });
+    }, reason => {});
   }
 
   addcls() {
@@ -61,14 +61,14 @@ export class ClassroomComponent implements OnInit {
   }
 
   showForm(content) {
-    this.clsmodel = {};
+    this.cleanform();
     this.showClassroomForm = !this.showClassroomForm;
     this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     this.modalRef.result.then((result) => {
       if (result != null) {
         this.addcls();
       }
-    });
+    }, reason => {});
   }
 
 }

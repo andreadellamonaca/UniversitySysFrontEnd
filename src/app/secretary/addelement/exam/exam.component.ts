@@ -73,17 +73,17 @@ export class ExamComponent implements OnInit {
       if (result != null) {
         this.addexam();
       }
-    });
+    }, reason => {});
   }
 
   showForm(content) {
-    this.exammodel = {};
+    this.cleanform();
     this.showExamForm = !this.showExamForm;
     this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     this.modalRef.result.then((result) => {
       if (result != null) {
         this.addexam();
       }
-    });
+    }, reason => {});
   }
 }

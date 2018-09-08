@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Classroom} from '../models/classroom';
+import {Variables} from '../Variables';
 
 const headers = new HttpHeaders({'Content-Type' : 'application/json'});
 
@@ -9,7 +10,7 @@ const headers = new HttpHeaders({'Content-Type' : 'application/json'});
   providedIn: 'root'
 })
 export class ClassroomService {
-  classroomurl = 'http://localhost:8080/Project_university/classroom';
+  classroomurl = `${Variables.ServerURL}/classroom`
 
   constructor(private http: HttpClient) { }
 
