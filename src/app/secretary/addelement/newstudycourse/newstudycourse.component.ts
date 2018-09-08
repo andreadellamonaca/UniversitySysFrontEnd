@@ -126,6 +126,7 @@ export class NewstudycourseComponent implements OnInit {
   }
 
   showNewStudycourseForm(content) {
+    this.cleanform();
     this.showNewSCourseForm = !this.showNewSCourseForm;
     this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     this.modalRef.result.then((result) => {
