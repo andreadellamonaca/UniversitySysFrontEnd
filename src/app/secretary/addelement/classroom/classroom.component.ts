@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Classroom} from '../../../models/classroom';
 import {ClassroomService} from '../../../services/classroom.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-classroom',
@@ -12,7 +13,10 @@ export class ClassroomComponent implements OnInit {
   clslist: Classroom[] = [];
   clsmodel: Classroom = {};
 
-  constructor(private router: Router, private clsService: ClassroomService) {
+  showClassroomForm: boolean = false;
+  modalRef: NgbModalRef;
+
+  constructor(private router: Router, private clsService: ClassroomService, private modalService: NgbModal) {
     this.clsService.getAll().subscribe(list => {
       this.clslist = list;
     });
@@ -29,8 +33,15 @@ export class ClassroomComponent implements OnInit {
     this.clsmodel = {};
   }
 
-  editelem(c: Classroom) {
+  editelem(c: Classroom, content) {
     this.clsmodel = c;
+    this.showClassroomForm = !this.showClassroomForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addcls();
+      }
+    });
   }
 
   addcls() {
@@ -46,6 +57,17 @@ export class ClassroomComponent implements OnInit {
         this.clslist = list;
       });
       this.cleanform();
+    });
+  }
+
+  showForm(content) {
+    this.clsmodel = {};
+    this.showClassroomForm = !this.showClassroomForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addcls();
+      }
     });
   }
 

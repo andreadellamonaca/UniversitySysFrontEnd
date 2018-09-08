@@ -1,3 +1,41 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new classroom</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Teaching</label>
+        <select name="teaching" class="form-control" [(ngModel)]="teachingmodel.idTeaching">
+          <option value=""></option>
+          <option *ngFor="let t of tlist" value="{{ t.idTeaching }}">{{ t.name }} ({{ t.user.name }} {{ t.user.surname }})</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Classroom</label>
+        <select name="classroom" class="form-control" [(ngModel)]="classroommodel.idClassroom">
+          <option value=""></option>
+          <option *ngFor="let c of clslist" value="{{ c.idClassroom }}">{{ c.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" name="date" class="form-control" [(ngModel)]="exammodel.date">
+      </div>
+      <div class="form-group">
+        <label>Hour</label>
+        <input type="text" name="hour" class="form-control" [(ngModel)]="exammodel.hour">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!(classroommodel) || !(teachingmodel) || !(exammodel.date) || !(exammodel.hour)" (click)="this.modalRef.close('save')" class="btn btn-block mb-4">Add exam</button>
+  </div>
+</ng-template>
+
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
@@ -18,38 +56,17 @@
       <td>{{ e.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ e.date }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <td>{{ e.hour }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" (click)="editelem(e)">Edit</button></td>
+      <td><button class="btn btn-sm btn-secondary" (click)="editelem(e, content)">Edit</button></td>
     </tr>
   </table>
   <div *ngIf="examslist.length == 0"><h4>There are no exams!</h4></div>
 </div>
-<hr>
+
+
+
+<br>
 <div class="container">
-  <h2>Exam Form:</h2>
-  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
-  <form (submit)="addexam()">
-    <div class="form-group">
-      <label>Teaching</label>
-      <select name="teaching" class="form-control" [(ngModel)]="teachingmodel.idTeaching">
-        <option value=""></option>
-        <option *ngFor="let t of tlist" value="{{ t.idTeaching }}">{{ t.name }} ({{ t.user.name }} {{ t.user.surname }})</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Classroom</label>
-      <select name="classroom" class="form-control" [(ngModel)]="classroommodel.idClassroom">
-        <option value=""></option>
-        <option *ngFor="let c of clslist" value="{{ c.idClassroom }}">{{ c.name }}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Date</label>
-      <input type="date" name="date" class="form-control" [(ngModel)]="exammodel.date">
-    </div>
-    <div class="form-group">
-      <label>Hour</label>
-      <input type="text" name="hour" class="form-control" [(ngModel)]="exammodel.hour">
-    </div>
-    <button [disabled]="!(classroommodel) || !(teachingmodel) || !(exammodel.date) || !(exammodel.hour)" class="btn btn-block mb-4">Add Exam</button>
-  </form>
+  <button (click)="showForm(content)" class="btn btn-sm btn-secondary">Add new exam</button>
+  <br>
 </div>
+<br>

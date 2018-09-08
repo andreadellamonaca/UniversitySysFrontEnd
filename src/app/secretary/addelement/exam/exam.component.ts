@@ -6,6 +6,7 @@ import {Classroom} from '../../../models/classroom';
 import {TeachingService} from '../../../services/teaching.service';
 import {Teaching} from '../../../models/teaching';
 import {ClassroomService} from '../../../services/classroom.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-exam',
@@ -20,7 +21,10 @@ export class ExamComponent implements OnInit {
   teachingmodel: Teaching = {};
   classroommodel: Classroom = {};
 
-  constructor(private router: Router, private examService: ExamService, private teachingService: TeachingService, private clsService: ClassroomService) {
+  showExamForm: boolean = false;
+  modalRef: NgbModalRef;
+
+  constructor(private router: Router, private examService: ExamService, private teachingService: TeachingService, private clsService: ClassroomService, private modalService: NgbModal) {
     this.examService.getAll().subscribe(list => {
       this.examslist = list;
     });
@@ -47,12 +51,6 @@ export class ExamComponent implements OnInit {
     this.classroommodel = {};
   }
 
-  editelem(e: Exam) {
-    this.exammodel = e;
-    this.teachingmodel = e.teaching;
-    this.classroommodel = e.classroom;
-  }
-
   addexam() {
     this.exammodel.teaching = this.teachingmodel;
     this.exammodel.classroom = this.classroommodel;
@@ -63,5 +61,29 @@ export class ExamComponent implements OnInit {
       });
     });
     this.cleanform();
+  }
+
+  editelem(e: Exam, content) {
+    this.exammodel = e;
+    this.teachingmodel = e.teaching;
+    this.classroommodel = e.classroom;
+    this.showExamForm = !this.showExamForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addexam();
+      }
+    });
+  }
+
+  showForm(content) {
+    this.exammodel = {};
+    this.showExamForm = !this.showExamForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addexam();
+      }
+    });
   }
 }
