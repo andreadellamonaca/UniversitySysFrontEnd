@@ -44,18 +44,6 @@ export class UserComponent implements OnInit {
     this.usermodel = {};
   }
 
-  editelem(p: User, content) {
-    p.password = '';
-    this.usermodel = p;
-    this.showuserForm = !this.showuserForm;
-    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
-    this.modalRef.result.then((result) => {
-      if (result != null) {
-        this.addprof();
-      }
-    });
-  }
-
   addprof() {
     this.usermodel.usertype = this.usertypemodel;
     for (const i of this.professorslist) {

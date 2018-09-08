@@ -1,39 +1,3 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add new professor</h4>
-    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label>Classroom</label>
-        <select name="classroom" class="form-control" [(ngModel)]="classroommodel.idClassroom">
-          <option value=""></option>
-          <option *ngFor="let c of clslist" value="{{ c.idClassroom }}">{{ c.name }}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Date</label>
-        <input type="date" name="date" class="form-control" [(ngModel)]="datemodel">
-      </div>
-      <div class="form-group">
-        <label>Start time</label>
-        <input type="text" name="starthour" class="form-control" [(ngModel)]="starttimemodel">
-      </div>
-      <div class="form-group">
-        <label>End time</label>
-        <input type="text" name="endhour" class="form-control" [(ngModel)]="endtimemodel">
-      </div>
-      <button  class="btn btn-block mb-4">Edit Lecture</button>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button [disabled]="!(classroommodel.idClassroom) || !(datemodel) || !(starttimemodel) || !(endtimemodel)" (click)="this.modalRef.close('save')" class="btn btn-block mb-4">Add professor</button>
-  </div>
-</ng-template>
-
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
@@ -71,61 +35,69 @@
   <div *ngIf="lectureslist.length == 0"><h4>There are no lectures!</h4></div>
 </div>
 <hr>
-<div class="container" *ngIf="lecturemodel.show_editform">
-  <h2>Edit Lecture Form:</h2>
-
-</div>
-<div class="container" *ngIf="!lecturemodel.show_editform">
-  <h2>New Lecture Form:</h2>
-  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
-  <form>
-    <div class="form-group">
-      <label>Classroom</label>
-      <select name="classroom" class="form-control" [(ngModel)]="classroommodel.idClassroom">
-        <option value=""></option>
-        <option *ngFor="let c of clslist" value="{{ c.idClassroom }}">{{ c.name }}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Teaching</label>
-      <select name="teaching" class="form-control" [(ngModel)]="teachingmodel.idTeaching">
-        <option value=""></option>
-        <option *ngFor="let t of tlist" value="{{ t.idTeaching }}">{{ t.name }} ({{ t.user.name }} {{ t.user.surname }})</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Start Date</label>
-      <input type="date" name="sdate" class="form-control" [(ngModel)]="startdatemodel">
-    </div>
-    <div class="form-group">
-      <label>End Date</label>
-      <input type="date" name="edate" class="form-control" [(ngModel)]="enddatemodel">
-    </div>
-    <div class="form-group">
-      <label>Choose some days:</label>
-      <div *ngFor="let w of weeklist">
-        <label>
-          <input type="checkbox" name="days" value="{{ w.name }}" [checked]="w.checked" (change)="changestatus(w)">
-          {{ w.name }}
-        </label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Start time</label>
-      <input type="text" name="starthour" class="form-control" [(ngModel)]="starttimemodel">
-    </div>
-    <div class="form-group">
-      <label>End time</label>
-      <input type="text" name="endhour" class="form-control" [(ngModel)]="endtimemodel">
-    </div>
-    <button (click)="addlecture()" [disabled]="!(teachingmodel.idTeaching) || !(classroommodel.idClassroom) || !(startdatemodel) || !(enddatemodel) || !(starttimemodel) || !(endtimemodel)" class="btn btn-block mb-4">Add Lecture</button>
-  </form>
-</div>
-
-
 <br>
 <div class="container">
   <button (click)="showForm(content)" class="btn btn-sm btn-secondary">Add new lecture</button>
   <br>
 </div>
 <br>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new professor</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Classroom</label>
+        <select name="classroom" class="form-control" [(ngModel)]="classroommodel.idClassroom">
+          <option value=""></option>
+          <option *ngFor="let c of clslist" value="{{ c.idClassroom }}">{{ c.name }}</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="!showeditform">
+        <label>Teaching</label>
+        <select name="teaching" class="form-control" [(ngModel)]="teachingmodel.idTeaching">
+          <option value=""></option>
+          <option *ngFor="let t of tlist" value="{{ t.idTeaching }}">{{ t.name }} ({{ t.user.name }} {{ t.user.surname }})</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="!showeditform">
+        <label>Start Date</label>
+        <input type="date" name="sdate" class="form-control" [(ngModel)]="startdatemodel">
+      </div>
+      <div class="form-group" *ngIf="!showeditform">
+        <label>End Date</label>
+        <input type="date" name="edate" class="form-control" [(ngModel)]="enddatemodel">
+      </div>
+      <div class="form-group" *ngIf="!showeditform">
+        <label>Choose some days:</label>
+        <div *ngFor="let w of weeklist">
+          <label>
+            <input type="checkbox" name="days" value="{{ w.name }}" [checked]="w.checked" (change)="changestatus(w)">
+            {{ w.name }}
+          </label>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="showeditform">
+        <label>Date</label>
+        <input type="date" name="date" class="form-control" [(ngModel)]="datemodel">
+      </div>
+      <div class="form-group">
+        <label>Start time</label>
+        <input type="text" name="starthour" class="form-control" [(ngModel)]="starttimemodel">
+      </div>
+      <div class="form-group">
+        <label>End time</label>
+        <input type="text" name="endhour" class="form-control" [(ngModel)]="endtimemodel">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="showeditform" [disabled]="!(classroommodel.idClassroom) || !(datemodel) || !(starttimemodel) || !(endtimemodel)" (click)="this.modalRef.close('save')" class="btn btn-block mb-4">Edit Lecture</button>
+    <button *ngIf="!showeditform" (click)="this.modalRef.close('save')" [disabled]="!(teachingmodel.idTeaching) || !(classroommodel.idClassroom) || !(startdatemodel) || !(enddatemodel) || !(starttimemodel) || !(endtimemodel)" class="btn btn-block mb-4">Add Lecture</button>
+  </div>
+</ng-template>

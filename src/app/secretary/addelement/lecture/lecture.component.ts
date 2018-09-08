@@ -88,7 +88,7 @@ export class LectureComponent implements OnInit {
   }
 
   editelem(l: Lecture, content) {
-    this.showeditform = !this.showeditform;
+    this.showeditform = true;
     if (this.lecturemodel.idLecture === l.idLecture ) {
       this.lecturemodel.show_editform = !this.lecturemodel.show_editform;
     } else {
@@ -99,6 +99,15 @@ export class LectureComponent implements OnInit {
     this.datemodel = l.date;
     this.starttimemodel = l.starttime;
     this.endtimemodel = l.endtime;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      this.showeditform = false;
+      if (result != null) {
+        this.editlecture();
+      } else {
+        this.cleanform();
+      }
+    }, reason => {this.cleanform(); });
   }
 
   cleanform() {
