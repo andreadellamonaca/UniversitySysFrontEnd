@@ -1,3 +1,48 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new professor</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form >
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" [(ngModel)]="teachingmodel.name">
+      </div>
+      <div class="form-group">
+        <label>CFU</label>
+        <input type="number" name="cfu" min="1" class="form-control" [(ngModel)]="teachingmodel.cfu">
+      </div>
+      <div class="form-group">
+        <label>Course year</label>
+        <input type="number" name="course year" min="1" max="3" class="form-control" [(ngModel)]="teachingmodel.courseYear">
+      </div>
+      <div class="form-group">
+        <label>Professor</label>
+        <select name="prof" class="form-control" [(ngModel)]="profmodel.idUser">
+          <option value=""></option>
+          <option *ngFor="let p of plist" value="{{ p.idUser }}">{{ p.name}} {{ p.surname }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Associated Study Courses:</label>
+        <div *ngFor="let sc of sclist">
+          <label>
+            <input type="checkbox" name="studycourse" value="{{ sc.idStudyCourse }}" [checked]="sc.checked" (change)="changestatus(sc)">
+            {{ sc.name }}
+          </label>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!(teachingmodel.name) || !(profmodel.idUser)" (click)="this.modalRef.close('save')" class="btn btn-block mb-4">Add professor</button>
+  </div>
+</ng-template>
+
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
@@ -24,44 +69,15 @@
           {{ sc.name }},
         </div>
       </td>&nbsp;
-      <td><button class="btn btn-sm btn-secondary" (click)="editelem(t)">Edit</button></td>
+      <td><button class="btn btn-sm btn-secondary" (click)="editelem(t, content)">Edit</button></td>
     </tr>
   </table>
   <div *ngIf="tlist.length == 0"><h4>There are no teachings!</h4></div>
 </div>
-<hr>
+
+<br>
 <div class="container">
-  <h2>Teaching Form:</h2>
-  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
-  <form (submit)="addteaching()">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" name="name" class="form-control" [(ngModel)]="teachingmodel.name">
-    </div>
-    <div class="form-group">
-      <label>CFU</label>
-      <input type="number" name="cfu" min="1" class="form-control" [(ngModel)]="teachingmodel.cfu">
-    </div>
-    <div class="form-group">
-      <label>Course year</label>
-      <input type="number" name="course year" min="1" max="3" class="form-control" [(ngModel)]="teachingmodel.courseYear">
-    </div>
-    <div class="form-group">
-      <label>Professor</label>
-      <select name="prof" class="form-control" [(ngModel)]="profmodel.idUser">
-        <option value=""></option>
-        <option *ngFor="let p of plist" value="{{ p.idUser }}">{{ p.name}} {{ p.surname }}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Associated Study Courses:</label>
-      <div *ngFor="let sc of sclist">
-        <label>
-          <input type="checkbox" name="studycourse" value="{{ sc.idStudyCourse }}" [checked]="sc.checked" (change)="changestatus(sc)">
-          {{ sc.name }}
-        </label>
-      </div>
-    </div>
-    <button [disabled]="!(teachingmodel.name) || !(profmodel.idUser)" class="btn btn-block mb-4">Add Teaching</button>
-  </form>
+  <button (click)="showTeachingForm(content)" class="btn btn-sm btn-secondary">Add new teaching</button>
+  <br>
 </div>
+<br>

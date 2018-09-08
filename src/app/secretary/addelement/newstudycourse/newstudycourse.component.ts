@@ -5,6 +5,7 @@ import {StudycourseService} from '../../../services/studycourse.service';
 import {StudyCourse} from '../../../models/study-course';
 import {CalendarService} from '../../../services/calendar.service';
 import {Calendar} from '../../../models/calendar';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-newstudycourse',
@@ -19,7 +20,10 @@ export class NewstudycourseComponent implements OnInit {
   calendarsmodel: Calendar[] = [];
   clist: Calendar[] = [];
 
-  constructor(private router: Router, private scService: StudycourseService, private calendarService: CalendarService) {
+  showNewSCourseForm: boolean = false;
+  modalRef: NgbModalRef;
+
+  constructor(private router: Router, private scService: StudycourseService, private calendarService: CalendarService, private modalService: NgbModal) {
     this.scService.getAll().subscribe(list => {
       this.sclist = list;
       for (const i of this.sclist) {
@@ -44,21 +48,31 @@ export class NewstudycourseComponent implements OnInit {
     this.router.navigateByUrl('secretary/newelem');
   }
 
-  editelem(sc: StudyCourse) {
-    sc.editform = !sc.editform;
+  editelem(sc: StudyCourse, content) {
     this.scmodel = sc;
     for (const i of this.clist) {
       for (const j of this.scmodel.calendars) {
         if (i.idCalendar === j.idCalendar) {
+
           i.checked = true;
+          break;
+
         } else {
           i.checked = false;
         }
       }
     }
+    console.log(this.clist);
+    this.showNewSCourseForm = !this.showNewSCourseForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addsc();
+      }
+    });
   }
-
   addsc() {
+    this.scmodel.calendars = [];
     for (const i of this.sclist) {
       if (i.name === this.scmodel.name && this.scmodel.idStudyCourse === undefined) {
         alert('Error! This StudyCourse already exists');
@@ -79,6 +93,7 @@ export class NewstudycourseComponent implements OnInit {
           this.scmodel.calendars.push(i);
         }
       }
+      console.log(this.scmodel);
       this.scService.save(this.scmodel).subscribe(data => {
         console.log(data);
         this.scService.getAll().subscribe(list => {
@@ -108,6 +123,16 @@ export class NewstudycourseComponent implements OnInit {
         i.checked = !i.checked;
       }
     }
+  }
+
+  showNewStudycourseForm(content) {
+    this.showNewSCourseForm = !this.showNewSCourseForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addsc();
+      }
+    });
   }
 
 }

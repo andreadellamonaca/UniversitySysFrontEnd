@@ -4,6 +4,7 @@ import {User} from '../../../models/User';
 import {Router} from '@angular/router';
 import {TeachingService} from '../../../services/teaching.service';
 import {UserType} from '../../../models/user-type';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user',
@@ -18,7 +19,10 @@ export class UserComponent implements OnInit {
     typeName: 'professor'
   };
 
-  constructor(private router: Router, private userService: UserService, private teachingService: TeachingService) {
+  showuserForm: Boolean = false;
+  modalRef: NgbModalRef;
+
+  constructor(private router: Router, private userService: UserService, private teachingService: TeachingService, private modalService: NgbModal) {
     this.userService.getAllProfessors().subscribe(list => {
       this.professorslist = list;
       for (const i of this.professorslist) {
@@ -40,14 +44,22 @@ export class UserComponent implements OnInit {
     this.usermodel = {};
   }
 
-  editelem(p: User) {
+  editelem(p: User, content) {
+    p.password = '';
     this.usermodel = p;
+    this.showuserForm = !this.showuserForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addprof();
+      }
+    });
   }
 
   addprof() {
     this.usermodel.usertype = this.usertypemodel;
     for (const i of this.professorslist) {
-      if (i.email === this.usermodel.email) {
+      if (i.email === this.usermodel.email && i.idUser === undefined) {
         alert('Error! This email already exists!');
         return;
       }
@@ -66,4 +78,14 @@ export class UserComponent implements OnInit {
     });
   }
 
+
+  showForm(content) {
+    this.showuserForm = !this.showuserForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addprof();
+      }
+    });
+  }
 }

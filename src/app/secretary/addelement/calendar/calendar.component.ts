@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Calendar} from '../../../models/calendar';
 import {CalendarService} from '../../../services/calendar.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-calendar',
@@ -14,8 +15,11 @@ export class CalendarComponent implements OnInit {
   currentyear = (new Date()).getFullYear();
   startyearmodel: number = this.currentyear;
   endyearmodel: number = this.currentyear + 1;
+  modalRef: NgbModalRef;
+  showCalendarForm: boolean = false;
 
-  constructor(private router: Router, private calendarService: CalendarService) {
+
+  constructor(private router: Router, private calendarService: CalendarService, private modalService: NgbModal) {
     this.calendarService.getAll().subscribe(list => {
       this.clist = list;
     });
@@ -35,7 +39,7 @@ export class CalendarComponent implements OnInit {
   }
 
   addcalendar() {
-    if (this.startyearmodel > this.endyearmodel) {
+    if (this.startyearmodel >= this.endyearmodel) {
       alert('Error! Modify the academic year field');
     } else {
       this.cmodel.academicYear = this.startyearmodel + '-' + this.endyearmodel;
@@ -55,4 +59,13 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  showNewCalendarForm(content) {
+    this.showCalendarForm = !this.showCalendarForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addcalendar();
+      }
+    });
+  }
 }

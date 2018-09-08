@@ -1,3 +1,30 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create new calendar</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Start Academic year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="number" name="start" min="{{ currentyear }}" max="2099" step="1" [(ngModel)]="startyearmodel" />
+      </div>
+      <div class="form-group">
+        <label>End Academic year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="number" name="end" min="{{ currentyear+1 }}" max="2099" step="1" [(ngModel)]="endyearmodel" />
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="this.modalRef.close('save')" class="btn btn-block mb-4">Add Calendar</button>
+  </div>
+
+</ng-template>
+
+
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
@@ -16,19 +43,12 @@
   </table>
   <div *ngIf="clist.length == 0"><h4>There are no academic years!</h4></div>
 </div>
-<hr>
+
+
+<br>
+
 <div class="container">
-  <h2>Calendar Form:</h2>
-  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
-  <form (submit)="addcalendar()">
-    <div class="form-group">
-      <label>Start Academic year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="number" name="start" min="{{ currentyear }}" max="2099" step="1" [(ngModel)]="startyearmodel" />
-    </div>
-    <div class="form-group">
-      <label>End Academic year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="number" name="end" min="{{ currentyear+1 }}" max="2099" step="1" [(ngModel)]="endyearmodel" />
-    </div>
-    <button class="btn btn-block mb-4">Add Calendar</button>
-  </form>
+  <button (click)="showNewCalendarForm(content)" class="btn btn-sm btn-secondary">Create new calendar</button>
+  <br>
 </div>
+<br>

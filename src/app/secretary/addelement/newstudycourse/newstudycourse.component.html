@@ -1,3 +1,37 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Make a report</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.modalRef.close(null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" [(ngModel)]="scmodel.name">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" name="description" class="form-control" [(ngModel)]="scmodel.description">
+      </div>
+      <div class="form-group">
+        <label>Associated Academic Year:</label>
+        <div *ngFor="let c of clist">
+          <label>
+            <input type="checkbox" name="calendar" value="{{ c.idCalendar }}" [checked]="c.checked" (change)="changestatus(c)">
+            {{ c.academicYear }}
+          </label>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="!(scmodel.name) || !(scmodel.description)" (click)="this.modalRef.close('save')" class="btn btn-block mb-4">Add studycourse</button>
+  </div>
+</ng-template>
+
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
@@ -20,33 +54,17 @@
           {{ cal.academicYear }},
         </div>
       </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" (click)="editelem(sc)">Edit</button></td>
+      <td><button class="btn btn-sm btn-secondary" (click)="editelem(sc, content)">Edit</button></td>
     </tr>
   </table>
   <div *ngIf="sclist.length == 0"><h4>There are no study courses!</h4></div>
 </div>
-<hr>
+
+
+<br>
+
 <div class="container">
-  <h2>Study Course Form:</h2>
-  <button class="btn btn-sm btn-secondary" (click)="cleanform()">Clean Form</button>
-  <form (submit)="addsc()">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" name="name" class="form-control" [(ngModel)]="scmodel.name">
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <input type="text" name="description" class="form-control" [(ngModel)]="scmodel.description">
-    </div>
-    <div class="form-group">
-      <label>Associated Academic Year:</label>
-      <div *ngFor="let c of clist">
-        <label>
-          <input type="checkbox" name="calendar" value="{{ c.idCalendar }}" [checked]="c.checked" (change)="changestatus(c)">
-          {{ c.academicYear }}
-        </label>
-      </div>
-    </div>
-    <button [disabled]="!(scmodel.name) || !(scmodel.description)" class="btn btn-block mb-4">Add StudyCourse</button>
-  </form>
+  <button (click)="showNewStudycourseForm(content)" class="btn btn-sm btn-secondary">Add studycourse</button>
+  <br>
 </div>
+<br>

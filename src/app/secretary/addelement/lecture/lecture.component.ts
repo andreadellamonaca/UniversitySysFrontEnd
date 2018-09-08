@@ -8,6 +8,7 @@ import {Classroom} from '../../../models/classroom';
 import {ClassroomService} from '../../../services/classroom.service';
 import {Timestamp} from 'rxjs';
 import {NotificationService} from '../../../services/notification.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-lecture',
@@ -38,11 +39,15 @@ export class LectureComponent implements OnInit {
     ];
   bufferdate: Date;
 
+  showLectureForm: boolean = false;
+  modalRef: NgbModalRef;
+
   constructor(private router: Router,
               private teachingService: TeachingService,
               private lectureService: LectureService,
               private classroomService: ClassroomService,
-              private notifService: NotificationService) {
+              private notifService: NotificationService,
+              private modalService: NgbModal) {
 
     this.teachingService.getAll().subscribe(list => {
       this.tlist = list;
@@ -82,7 +87,7 @@ export class LectureComponent implements OnInit {
     }
   }
 
-  editelem(l: Lecture) {
+  editelem(l: Lecture, content) {
     this.showeditform = !this.showeditform;
     if (this.lecturemodel.idLecture === l.idLecture ) {
       this.lecturemodel.show_editform = !this.lecturemodel.show_editform;
@@ -189,6 +194,16 @@ export class LectureComponent implements OnInit {
       }
     }
     this.cleanform();
+  }
+
+  showForm(content) {
+    this.showLectureForm = !this.showLectureForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addlecture();
+      }
+    });
   }
 
 }

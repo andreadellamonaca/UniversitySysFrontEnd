@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import {StudycourseService} from '../../../services/studycourse.service';
 import {StudyCourse} from '../../../models/study-course';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-teaching',
@@ -19,7 +20,14 @@ export class TeachingComponent implements OnInit {
   profmodel: User = {};
   sclist: StudyCourse[] = [];
 
-  constructor(private router: Router, private teachingService: TeachingService, private userService: UserService, private scService: StudycourseService) {
+  showForm: boolean = false;
+  modalRef: NgbModalRef;
+
+  constructor(private router: Router,
+              private teachingService: TeachingService,
+              private userService: UserService,
+              private scService: StudycourseService,
+              private modalService: NgbModal) {
     this.teachingService.getAll().subscribe(list => {
       this.tlist = list;
       for (const i of this.tlist) {
@@ -62,21 +70,30 @@ export class TeachingComponent implements OnInit {
     }
   }
 
-  editelem(t: Teaching) {
+  editelem(t: Teaching, content) {
     this.teachingmodel = t;
     this.profmodel = this.teachingmodel.user;
     for (const i of this.sclist) {
       for (const j of this.teachingmodel.studycourses) {
         if (i.idStudyCourse === j.idStudyCourse) {
           i.checked = true;
+          break;
         } else {
           i.checked = false;
         }
       }
     }
+    this.showForm = !this.showForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addteaching();
+      }
+    });
   }
 
   addteaching() {
+    this.teachingmodel.studycourses = [];
     let count = 0;
     for (const i of this.sclist) {
       if (i.checked === true) {
@@ -109,5 +126,15 @@ export class TeachingComponent implements OnInit {
         this.cleanform();
       });
     }
+  }
+
+  showTeachingForm(content) {
+    this.showForm = !this.showForm;
+    this.modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalRef.result.then((result) => {
+      if (result != null) {
+        this.addteaching();
+      }
+    });
   }
 }
