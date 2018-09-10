@@ -16,6 +16,8 @@ export class ClassroomComponent implements OnInit {
   showClassroomForm: boolean = false;
   modalRef: NgbModalRef;
 
+  displayedColumns: string[] = ['position', 'name', 'description', 'coordinates', 'edit'];
+
   constructor(private router: Router, private clsService: ClassroomService, private modalService: NgbModal) {
     this.clsService.getAll().subscribe(list => {
       this.clslist = list;

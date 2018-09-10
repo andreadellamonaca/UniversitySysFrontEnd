@@ -24,6 +24,8 @@ export class ExamComponent implements OnInit {
   showExamForm: boolean = false;
   modalRef: NgbModalRef;
 
+  displayedColumns: string[] = ['position', 'teaching', 'classroom', 'date', 'hour', 'edit'];
+
   constructor(private router: Router, private examService: ExamService, private teachingService: TeachingService, private clsService: ClassroomService, private modalService: NgbModal) {
     this.examService.getAll().subscribe(list => {
       this.examslist = list;

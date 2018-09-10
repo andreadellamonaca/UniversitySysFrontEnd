@@ -1,7 +1,18 @@
 <app-secrnavbar></app-secrnavbar>
+<mat-tab-group>
+  <mat-tab label="Calendar"> <app-calendar></app-calendar> </mat-tab>
+  <mat-tab label="StudyCourse"> <app-newstudycourse></app-newstudycourse> </mat-tab>
+  <mat-tab label="User"> <app-user></app-user> </mat-tab>
+  <mat-tab label="Teaching"> <app-teaching></app-teaching> </mat-tab>
+  <mat-tab label="Lecture"> <app-lecture></app-lecture> </mat-tab>
+  <mat-tab label="Classroom"> <app-classroom></app-classroom> </mat-tab>
+  <mat-tab label="Exam"> <app-exam></app-exam> </mat-tab>
+</mat-tab-group>
+<!--
 <div class="container">
   <h2>Select the element to create:</h2>
   <div *ngFor="let el of list">
     <button class="btn btn-sm btn-secondary" (click)="openForm(el.url)">{{ el.title }}</button>
   </div>
 </div>
+-->

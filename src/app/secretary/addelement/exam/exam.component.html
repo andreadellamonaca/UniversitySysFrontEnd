@@ -36,30 +36,60 @@
   </div>
 </ng-template>
 
+<!--
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
 </div>
+-->
+<br>
 <div class="container">
   <h2>Exams List</h2>
-  <table>
-    <tr>
-      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Teaching</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Classroom</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Date</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Hour</th>
-    </tr>
-    <tr *ngFor="let e of examslist">
-      <td>{{ examslist.indexOf(e)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ e.teaching.name }} ({{e.teaching.cfu}})</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ e.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ e.date }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ e.hour }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" (click)="editelem(e, content)">Edit</button></td>
-    </tr>
+  <table mat-table [dataSource]="examslist" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{examslist.indexOf(element)+1}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="teaching">
+      <th mat-header-cell *matHeaderCellDef> Teaching </th>
+      <td mat-cell *matCellDef="let element"> {{ element.teaching.name }} ({{element.teaching.cfu}}) </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="classroom">
+      <th mat-header-cell *matHeaderCellDef> Classroom </th>
+      <td mat-cell *matCellDef="let element"> {{element.classroom.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="hour">
+      <th mat-header-cell *matHeaderCellDef> Hour </th>
+      <td mat-cell *matCellDef="let element"> {{element.hour}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button class="btn btn-sm btn-secondary" (click)="editelem(element, content)">Edit</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div *ngIf="examslist.length == 0"><h4>There are no exams!</h4></div>
 </div>
 
 

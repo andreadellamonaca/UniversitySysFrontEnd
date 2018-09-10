@@ -19,6 +19,7 @@ export class NewstudycourseComponent implements OnInit {
   };
   calendarsmodel: Calendar[] = [];
   clist: Calendar[] = [];
+  displayedColumns: string[] = ['position', 'name', 'description', 'ac_years', 'edit'];
 
   showNewSCourseForm: boolean = false;
   modalRef: NgbModalRef;

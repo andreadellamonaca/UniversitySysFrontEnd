@@ -32,32 +32,58 @@
   </div>
 </ng-template>
 
+<!--
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
 </div>
+-->
+<br>
 <div class="container">
   <h2>Study Courses List</h2>
-  <table>
-    <tr>
-      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Name</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Description</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Academic Years</th>
-    </tr>
-    <tr *ngFor="let sc of sclist">
-      <td>{{ sclist.indexOf(sc)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ sc.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ sc.description }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>
-        <div *ngFor="let cal of sc.calendars">
-          {{ cal.academicYear }},
-        </div>
-      </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" (click)="editelem(sc, content)">Edit</button></td>
-    </tr>
+  <table mat-table [dataSource]="sclist" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{sclist.indexOf(element)+1}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ac_years">
+      <th mat-header-cell *matHeaderCellDef> AcademicYears </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngFor="let ac of element.calendars">
+            {{ ac.academicYear }},
+          </div>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button class="btn btn-sm btn-secondary" (click)="editelem(element, content)">Edit</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div *ngIf="sclist.length == 0"><h4>There are no study courses!</h4></div>
 </div>
 
 

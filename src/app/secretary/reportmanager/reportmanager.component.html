@@ -1,47 +1,108 @@
 <app-secrnavbar></app-secrnavbar>
-<div class="container">
-  <h2>Pending Reports</h2>
-  <table>
-    <tr>
-      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Professor</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Classroom</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Description</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </tr>
-    <tr *ngFor="let r of pendingReports">
-      <td>{{ pendingReports.indexOf(r)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.userByProfessorIdProfessor.name }} {{ r.userByProfessorIdProfessor.surname }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.problemDescription }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" (click)="take(r)">Take in charge</button></td>
-    </tr>
-  </table>
-  <div *ngIf="pendingReports.length == 0"><h4>There are no pending reports!</h4></div>
-</div>
-<hr>
-<div class="container">
-  <h2>Your Reports</h2>
-  <table>
-    <tr>
-      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Professor</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Classroom</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Description</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Status</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Note</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </tr>
-    <tr *ngFor="let r of myreports">
-      <td>{{ myreports.indexOf(r)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.userByProfessorIdProfessor.name }} {{ r.userByProfessorIdProfessor.surname }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.problemDescription }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.reportstatus.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ r.note }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" [disabled]="!(r.reportstatus.name != 'refused' && r.reportstatus.name != 'resolved')" (click)="modify(r, content)">Modify</button></td>
-    </tr>
-  </table>
-  <div *ngIf="myreports.length == 0"><h4>There are no reports for you!</h4></div>
-</div>
+<mat-tab-group>
+  <mat-tab label="Pending Reports">
+    <div class="container">
+      <br>
+      <h2>Pending Reports</h2>
+      <table mat-table [dataSource]="pendingReports" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{pendingReports.indexOf(element)+1}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="professor">
+          <th mat-header-cell *matHeaderCellDef> Professor </th>
+          <td mat-cell *matCellDef="let element"> {{element.userByProfessorIdProfessor.name}} {{element.userByProfessorIdProfessor.surname}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="classroom">
+          <th mat-header-cell *matHeaderCellDef> Classroom </th>
+          <td mat-cell *matCellDef="let element"> {{element.classroom.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.problemDescription}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="take">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button class="btn btn-sm btn-secondary" (click)="take(element)">Take in charge</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-tab>
+  <mat-tab label="Your Reports">
+    <div class="container">
+      <br>
+      <h2>Your Reports</h2>
+      <table mat-table [dataSource]="myreports" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position1">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{myreports.indexOf(element)+1}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="professor1">
+          <th mat-header-cell *matHeaderCellDef> Professor </th>
+          <td mat-cell *matCellDef="let element"> {{element.userByProfessorIdProfessor.name}} {{element.userByProfessorIdProfessor.surname}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="classroom1">
+          <th mat-header-cell *matHeaderCellDef> Classroom </th>
+          <td mat-cell *matCellDef="let element"> {{element.classroom.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="description1">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.problemDescription}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.reportstatus.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="note">
+          <th mat-header-cell *matHeaderCellDef> Note </th>
+          <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button class="btn btn-sm btn-secondary" [disabled]="!(element.reportstatus.name != 'refused' && element.reportstatus.name != 'resolved')" (click)="modify(element, content)">Modify</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+      </table>
+    </div>
+  </mat-tab>
+</mat-tab-group>
 
 <ng-template #content let-modal>
   <div class="modal-header">

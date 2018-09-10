@@ -1,4 +1,21 @@
 <app-profnavbar></app-profnavbar>
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ newProf.name }} {{ newProf.surname }}</mat-card-title>
+    <mat-card-subtitle>{{ newProf.usertype.typeName }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Email: {{ newProf.email }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="goto('professor/teachings')">Your Teachings</button>&nbsp;
+    <button mat-raised-button color="primary" (click)="goto('professor/reports')">Reports</button>
+  </mat-card-actions>
+</mat-card>
+<!--
 <div class="container">
   <h2>
     Welcome {{ newProf.name }} {{ newProf.surname }}!!!
@@ -15,3 +32,4 @@
   <br>
   <a href="professor/reports">Reports</a>
 </div>
+-->

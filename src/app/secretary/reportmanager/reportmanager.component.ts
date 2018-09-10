@@ -21,6 +21,9 @@ export class ReportmanagerComponent implements OnInit {
 
   modalRef: NgbModalRef;
 
+  displayedColumns: string[] = ['position', 'professor', 'classroom', 'description', 'take'];
+  displayedColumns1: string[] = ['position1', 'professor1', 'classroom1', 'description1', 'status', 'note', 'edit'];
+
   constructor(private reportService: ReportService, private rstatusService: ReportstatusService,
               private notService: NotificationService, private modalService: NgbModal) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));

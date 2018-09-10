@@ -8,3 +8,6 @@ select{
   list-style-type:none;
 }
 
+table {
+  width: 100%;
+}

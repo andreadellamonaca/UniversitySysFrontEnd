@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Teaching} from '../../models/teaching';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TeachingService} from '../../services/teaching.service';
 import {Lecture} from '../../models/lecture';
 import {LectureService} from '../../services/lecture.service';
@@ -30,7 +30,6 @@ export class TeachingDetailComponent implements OnInit {
     user: {idUser: null},
     lecture: {idLecture: null}
   };
-
 
 
   constructor(private route: ActivatedRoute,

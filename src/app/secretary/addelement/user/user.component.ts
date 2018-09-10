@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
 
   showuserForm: Boolean = false;
   modalRef: NgbModalRef;
+  displayedColumns: string[] = ['position', 'name', 'email', 'teachings'];
 
   constructor(private router: Router, private userService: UserService, private teachingService: TeachingService, private modalService: NgbModal) {
     this.userService.getAllProfessors().subscribe(list => {

@@ -23,6 +23,8 @@ export class TeachingComponent implements OnInit {
   showForm: boolean = false;
   modalRef: NgbModalRef;
 
+  displayedColumns: string[] = ['position', 'name', 'cfu', 'professor', 'courseyear', 'studycourses', 'edit'];
+
   constructor(private router: Router,
               private teachingService: TeachingService,
               private userService: UserService,

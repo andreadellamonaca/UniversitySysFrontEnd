@@ -42,6 +42,8 @@ export class LectureComponent implements OnInit {
   showLectureForm: boolean = false;
   modalRef: NgbModalRef;
 
+  displayedColumns: string[] = ['position', 'teaching', 'professor', 'classroom', 'date', 'hour', 'edit'];
+
   constructor(private router: Router,
               private teachingService: TeachingService,
               private lectureService: LectureService,

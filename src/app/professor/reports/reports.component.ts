@@ -30,6 +30,9 @@ export class ReportsComponent implements OnInit {
 
   modalRef: NgbModalRef;
 
+  displayedColumns: string[] = ['position', 'secretary', 'classroom', 'description', 'status', 'note'];
+  displayedColumns1: string[] = ['position', 'secretary', 'professor', 'classroom', 'description', 'status', 'note'];
+
   constructor(private reportService: ReportService,
               private classroomService: ClassroomService,
               private modalService: NgbModal) { }

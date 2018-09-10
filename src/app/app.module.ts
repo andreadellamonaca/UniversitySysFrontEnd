@@ -30,6 +30,16 @@ import { LectureComponent } from './secretary/addelement/lecture/lecture.compone
 import { CalendarComponent } from './secretary/addelement/calendar/calendar.component';
 import { ReportmanagerComponent } from './secretary/reportmanager/reportmanager.component';
 import { AgmCoreModule } from '@agm/core';
+import {
+  MatButtonModule,
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardModule,
+  MatTableModule, MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -60,7 +70,11 @@ import { AgmCoreModule } from '@agm/core';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    MatCardModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatTableModule
   ],
   providers: [UserService, TeachingService, NgbRatingConfig],
   bootstrap: [AppComponent]

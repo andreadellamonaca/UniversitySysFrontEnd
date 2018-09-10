@@ -18,6 +18,8 @@ export class CalendarComponent implements OnInit {
   modalRef: NgbModalRef;
   showCalendarForm: boolean = false;
 
+  displayedColumns: string[] = ['position', 'ac_year'];
+
 
   constructor(private router: Router, private calendarService: CalendarService, private modalService: NgbModal) {
     this.calendarService.getAll().subscribe(list => {

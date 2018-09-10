@@ -1,7 +1,10 @@
+<!--
 <app-secrnavbar></app-secrnavbar>
 <div class="container">
   <button class="btn btn-sm btn-secondary" (click)="backEvent()">Back</button>
 </div>
+-->
+<br>
 <div class="container">
   <h2>Lectures List</h2>
   <input type="date" name="date" [(ngModel)]="selecteddate">&nbsp;&nbsp;&nbsp;
@@ -13,26 +16,57 @@
   </select>&nbsp;&nbsp;&nbsp;
   <button class="btn btn-sm btn-secondary" (click)="showbyteaching()">Show By Teaching</button>
   <br><br>
-  <table>
-    <tr>
-      <th>#</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Teaching</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Professor</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Classroom</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Date</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <th>Hour</th>
-    </tr>
-    <tr *ngFor="let l of lectureslist">
-      <td>{{ lectureslist.indexOf(l)+1 }} </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ l.teaching.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ l.teaching.user.name }} {{ l.teaching.user.surname }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ l.classroom.name }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ l.date }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td>{{ l.starttime }} - {{ l.endtime }}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <td><button class="btn btn-sm btn-secondary" (click)="editelem(l, content)">Edit</button></td>
-    </tr>
+  <table mat-table [dataSource]="lectureslist" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{lectureslist.indexOf(element)+1}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="teaching">
+      <th mat-header-cell *matHeaderCellDef> Teaching </th>
+      <td mat-cell *matCellDef="let element"> {{element.teaching.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="professor">
+      <th mat-header-cell *matHeaderCellDef> Professor </th>
+      <td mat-cell *matCellDef="let element"> {{element.teaching.user.name}} {{element.teaching.user.surname}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="classroom">
+      <th mat-header-cell *matHeaderCellDef> Classroom </th>
+      <td mat-cell *matCellDef="let element"> {{element.classroom.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="hour">
+      <th mat-header-cell *matHeaderCellDef> Hour </th>
+      <td mat-cell *matCellDef="let element"> {{element.starttime}} {{element.endtime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button class="btn btn-sm btn-secondary" (click)="editelem(element, content)">Edit</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <div *ngIf="lectureslist.length == 0"><h4>There are no lectures!</h4></div>
 </div>
 <hr>
 <br>
