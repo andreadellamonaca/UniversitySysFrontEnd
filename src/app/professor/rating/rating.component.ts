@@ -17,6 +17,8 @@ export class RatingComponent implements OnInit {
   lectureratings: Lecturerating[] = [];
   tmaterialratings: Materialrating[] = [];
 
+  displayedColumns: string[] = ['position', 'level', 'note'];
+
   constructor(private location: Location,
               private ratingService: RatingService) { }
 
