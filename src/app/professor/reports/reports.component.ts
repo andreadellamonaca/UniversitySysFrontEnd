@@ -61,7 +61,7 @@ export class ReportsComponent implements OnInit {
       if (result != null) {
         this.addReport(result);
       }
-    });
+    },reason => {});
   }
 
   eventmyReports() {

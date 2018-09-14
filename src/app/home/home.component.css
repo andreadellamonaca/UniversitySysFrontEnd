@@ -1,5 +1,8 @@
 .col-md-6 {
   text-align: center;
   padding: 20px;
-  margin-left: 300px;
+  margin-left: 25%;
+}
+.navbar-brand {
+  color: white;
 }

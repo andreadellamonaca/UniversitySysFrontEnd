@@ -80,6 +80,14 @@ export class TeachingDetailComponent implements OnInit {
         console.log(data);
       });
       alert('File uploaded correctly!');
+      this.tmaterialService.getTMaterialByLectureId(l.idLecture).subscribe(tmaterials => {
+        l.tmaterials = tmaterials;
+        for (const i of l.tmaterials) {
+          this.ratingService.getAverageRatingByIdMaterial(i.idTeachingMaterial).subscribe(rating => {
+            i.av_rating = rating;
+          });
+        }
+      });
     });
   }
 
@@ -89,10 +97,25 @@ export class TeachingDetailComponent implements OnInit {
     console.log(this.t_material);
     this.tmaterialService.saveLink(this.t_material).subscribe(tm => {
       console.log(tm);
+      this.t_material = {
+        name: '',
+        type: '',
+        link: '',
+        user: {idUser: null},
+        lecture: {idLecture: null}
+      };
       this.notService.NewMaterialNotification(this.teaching, l).subscribe(data => {
         console.log(data);
       });
       alert('Link uploaded correctly!');
+      this.tmaterialService.getTMaterialByLectureId(l.idLecture).subscribe(tmaterials => {
+        l.tmaterials = tmaterials;
+        for (const i of l.tmaterials) {
+          this.ratingService.getAverageRatingByIdMaterial(i.idTeachingMaterial).subscribe(rating => {
+            i.av_rating = rating;
+          });
+        }
+      });
     });
   }
 
